@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style/style.css" rel="stylesheet" type="text/css">
+    <link href="assets/style/style.css" rel="stylesheet" type="text/css">
     <title>Document</title>
 
     
@@ -13,7 +13,7 @@
             <div class="wrapper">
                 <div class="header__wrapper">
                     <div class="header__logo">
-                        <img src="images/logo.png" alt="TravelApp logo" class="header__logo-img">
+                        <img src="assets/images/logo.png" alt="TravelApp logo" class="header__logo-img">
                     </div>
 
                     <nav class="header__nav">
@@ -56,24 +56,9 @@
     </section> 
 </body>
 
-<script>
-    document.getElementsByClassName('content__transport_btn-plane')[0].addEventListener('click', function(){
-        document.getElementsByClassName('content__choose')[0].style.display = "flex";
-        document.getElementsByClassName('content__choose_car')[0].style.display = "none";
-        document.getElementsByClassName('content__choose_plane')[0].style.display = "flex";
-    })
-    document.getElementsByClassName('content__transport_btn-car')[0].addEventListener('click', function(){
-        document.getElementsByClassName('content__choose')[0].style.display = "flex";
-        document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
-        document.getElementsByClassName('content__choose_car')[0].style.display = "flex";
-    })
-</script>
-
-
-
-<link rel="stylesheet" type="text/css" href="/jquery.datetimepicker.css">
-<script src="/jquery.js"></script>
-<script src="/build/jquery.datetimepicker.full.min.js"></script>
+<link rel="stylesheet" type="text/css" href="assets/style/jquery.datetimepicker.css">
+<script src="assets/jquery/jquery.js"></script>
+<script src="assets/jquery/build/jquery.datetimepicker.full.min.js"></script>
 <script>jQuery(function(){
 
  jQuery('#date_timepicker_start').datetimepicker({
@@ -96,19 +81,5 @@
  });
 });
 </script>
-
-<script>
-    fetch("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query=Stockholm", {
-	    "method": "GET",
-	    "headers": {
-		    "x-rapidapi-host": "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com",
-		    "x-rapidapi-key": "cf75ecbd7dmsh76f1f68906a6bd8p1f9fccjsndbf26ec289ab"
-	    }
-    })
-    .then(response => response.json().then((data) => console.log(data)))
-    .catch(err => {
-        console.log(err);
-    });
-
-</script>
+<script src="assets/javascript/index.js"></script>
 </html>
