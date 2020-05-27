@@ -17,7 +17,7 @@
                     </div>
 
                     <nav class="header__nav">
-                        <button class="header__nav-login">Log in</button>
+                        <button class="header__nav-login btn">Log in</button>
                     </nav>
                 </div>
             </div>
@@ -27,8 +27,8 @@
             <div class="wrapper">
                 <div class="content__wrapper">
                     <div class="content__transport_btns">
-                        <button class="content__transport_btn-plane">Plane</button>
-                        <button class="content__transport_btn-car">Car</button>
+                        <button class="content__transport_btns-plane btn">Plane</button>
+                        <button class="content__transport_btns-car btn">Car</button>
                     </div>
 
                     <div class="content__choose">
@@ -44,9 +44,8 @@
                                 <input class="content__choose_plane_date-to" id="date_timepicker_end" type="text" placeholder="Enter date to" autocomplete="off">
                             </div>
                             
-                            <input class="content__choose_plane-person" type="number">
-                            <button class="content__choose_plane-btn">Search</button>
-                            <input list="hosting-plan" type="text">                           
+                            <input class="content__choose_plane-person" type="number" placeholder="Enter quantity of people">
+                            <button class="content__choose_plane-btn btn ">Search</button>                          
                         </div>
                         <div class="content__choose_car"></div>
                     </div>
@@ -63,7 +62,7 @@
     jQuery(function(){
         jQuery('#date_timepicker_start').datetimepicker({
             format:'Y/m/d',
-            onShow:function(ct){this.setOptions({ maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false})},
+            onShow:function(ct){this.setOptions({ minDate:0,maxDate:jQuery('#date_timepicker_end').val()?jQuery('#date_timepicker_end').val():false})},
             timepicker:false
         });
 

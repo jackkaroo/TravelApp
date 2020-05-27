@@ -34,7 +34,7 @@ airportFrom.addEventListener('keypress', function(){
 
 let airportTo = document.getElementsByClassName('content__choose_plane_dest-to')[0];
 airportTo.addEventListener('keypress', function(){
-    if(airportFrom.value.length>1)
+    if(airportTo.value.length>1)
         getAirports('destination-to',airportTo.value);
 });
 
@@ -45,12 +45,12 @@ airportTo.addEventListener('keypress', function(){
 
 
 
-document.getElementsByClassName('content__transport_btn-plane')[0].addEventListener('click', function(){
+document.getElementsByClassName('content__transport_btns-plane')[0].addEventListener('click', function(){
     document.getElementsByClassName('content__choose')[0].style.display = "flex";
     document.getElementsByClassName('content__choose_car')[0].style.display = "none";
     document.getElementsByClassName('content__choose_plane')[0].style.display = "flex";
 })
-document.getElementsByClassName('content__transport_btn-car')[0].addEventListener('click', function(){
+document.getElementsByClassName('content__transport_btns-car')[0].addEventListener('click', function(){
     document.getElementsByClassName('content__choose')[0].style.display = "flex";
     document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
     document.getElementsByClassName('content__choose_car')[0].style.display = "flex";

@@ -15,10 +15,16 @@ body{
     max-width: 1000px;
     width:100%;
     margin:0 auto;
-
-    /*temp*/
-    
 }
+
+.btn, input{
+    padding: 10px 0;
+    width:150px;
+    border-radius: 5px;
+    border: 1px solid blue;
+    background-color: white;
+}
+
 
 .header{
     background-color: rgb(255, 255, 255);
@@ -38,6 +44,7 @@ body{
         }
     }
 }
+
 .content{
     background: url(/assets/images/background.jpeg) no-repeat center;
     background-size: cover;
@@ -54,8 +61,11 @@ body{
         &_btns{
             display:flex;
             justify-content: center;
-            
             margin-bottom:50px;
+            
+            &-plane{
+                margin-right: 20px;
+            }
         }
     }
 
@@ -67,20 +77,28 @@ body{
         &_plane{
             display:flex;
             flex-direction: column;
-            
+
+            &_dest{
+                margin-bottom: 10px;
+                &-from{
+                    margin-right: 20px;
+                }
+            }
+
+            &_date{
+                margin-bottom: 10px;
+                &-from{
+                    margin-right: 20px;
+                }
+            }
         
             &-person{
-                width:30%;
                 margin: 0 auto;
+                margin-bottom: 10px;
             }
 
             &-btn{
-                width:30%;
                 margin: 0 auto;
-            }
-
-            &_date-from:disabled{
-                
             }
         }      
     }

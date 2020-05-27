@@ -14,7 +14,14 @@ body {
   max-width: 1000px;
   width: 100%;
   margin: 0 auto;
-  /*temp*/
+}
+
+.btn, input {
+  padding: 10px 0;
+  width: 150px;
+  border-radius: 5px;
+  border: 1px solid blue;
+  background-color: white;
 }
 
 .header {
@@ -47,6 +54,9 @@ body {
   justify-content: center;
   margin-bottom: 50px;
 }
+.content__transport_btns-plane {
+  margin-right: 20px;
+}
 .content__choose {
   /* display:none;*/
   display: flex;
@@ -56,12 +66,23 @@ body {
   display: flex;
   flex-direction: column;
 }
+.content__choose_plane_dest {
+  margin-bottom: 10px;
+}
+.content__choose_plane_dest-from {
+  margin-right: 20px;
+}
+.content__choose_plane_date {
+  margin-bottom: 10px;
+}
+.content__choose_plane_date-from {
+  margin-right: 20px;
+}
 .content__choose_plane-person {
-  width: 30%;
   margin: 0 auto;
+  margin-bottom: 10px;
 }
 .content__choose_plane-btn {
-  width: 30%;
   margin: 0 auto;
 }
 
