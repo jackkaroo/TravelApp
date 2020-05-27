@@ -6,6 +6,9 @@ html{
 *, *::before, *::after{
     box-sizing: inherit;
 }
+h1,h2,p{
+    margin: 0;
+}
 
 body{
     margin:0;
@@ -17,12 +20,22 @@ body{
     margin:0 auto;
 }
 
-.btn, input{
-    padding: 10px 0;
+.btn, input,span{
+    padding: 10px;
     width:150px;
     border-radius: 5px;
-    border: 1px solid blue;
+    border: 1px solid rgb(41, 85, 37);
     background-color: white;
+}
+
+.btn:hover, input:hover,span:hover{
+    outline: none;
+    color:white;
+    background-color: rgb(41, 85, 37);
+}
+
+.btn:focus, input:focus{
+    outline: none;
 }
 
 
@@ -40,21 +53,35 @@ body{
 
     &__logo{
         &-img{
-            width:60%;
+            width:40%;
         }
     }
 }
 
 .content{
-    background: url(/assets/images/background.jpeg) no-repeat center;
+    background: url(/assets/images/bg-road.jpg) no-repeat center;
     background-size: cover;
     margin:0 auto;
-    min-height:80vh;
+    min-height:100vh;
+    text-align: center;
 
     &__wrapper{
         padding:50px 100px;
         max-width:800px;
         margin:0 auto;
+    }
+
+    &-title{
+        color:white;
+        font-size: 70px;
+        font-family: Calibri;
+    }
+
+    &-subtitle{
+        color:white;
+        font-size: 30px;
+        font-family: Calibri;
+        margin-bottom: 20px;
     }
 
     &__transport{
@@ -70,9 +97,10 @@ body{
     }
 
     &__choose{
-       /* display:none;*/
-        display:flex;
+        display:none;
+        /*display:flex;*/
         justify-content: center;
+       
         
         &_plane{
             display:flex;
@@ -83,18 +111,26 @@ body{
                 &-from{
                     margin-right: 20px;
                 }
+                &-to{
+                   
+                }
             }
 
             &_date{
                 margin-bottom: 10px;
+               
                 &-from{
                     margin-right: 20px;
                 }
             }
         
             &-person{
+                width:100%;
                 margin: 0 auto;
                 margin-bottom: 10px;
+                display:flex;
+                justify-content: space-between;
+                cursor: context-menu;
             }
 
             &-btn{

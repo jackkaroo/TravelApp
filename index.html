@@ -26,6 +26,8 @@
     <section class="content">
             <div class="wrapper">
                 <div class="content__wrapper">
+                    <h1 class="content-title">Start your journey</h1>
+                    <h2 class="content-subtitle">by</h2>
                     <div class="content__transport_btns">
                         <button class="content__transport_btns-plane btn">Plane</button>
                         <button class="content__transport_btns-car btn">Car</button>
@@ -34,17 +36,17 @@
                     <div class="content__choose">
                         <div class="content__choose_plane">
                             <div class="content__choose_plane_dest">
-                                <input type ="text" list="destination-from" class="content__choose_plane_dest-from" placeholder="Enter destination from">
+                                <input type ="text" list="destination-from" class="content__choose_plane_dest-from" placeholder="Origin">
                                 <datalist id="destination-from"></datalist>
-                                <input type ="text" list="destination-to" class="content__choose_plane_dest-to" placeholder="Enter destination to">
+                                <input type ="text" list="destination-to" class="content__choose_plane_dest-to" placeholder="Destination">
                                 <datalist id="destination-to"></datalist>
                             </div>
                             <div class="content__choose_plane_date">
-                                <input class="content__choose_plane_date-from" id="date_timepicker_start" type="text" placeholder="Enter date from" autocomplete="off">
-                                <input class="content__choose_plane_date-to" id="date_timepicker_end" type="text" placeholder="Enter date to" autocomplete="off">
+                                <input class="content__choose_plane_date-from" id="date_timepicker_start" type="text" placeholder="Departure" autocomplete="off">
+                                <input class="content__choose_plane_date-to" id="date_timepicker_end" type="text" placeholder="Return" autocomplete="off">
                             </div>
                             
-                            <input class="content__choose_plane-person" type="number" placeholder="Enter quantity of people">
+                            <span class="content__choose_plane-person">Passengers <p class="content__choose_plane-person-quantity">0</p></span>
                             <button class="content__choose_plane-btn btn ">Search</button>                          
                         </div>
                         <div class="content__choose_car"></div>
