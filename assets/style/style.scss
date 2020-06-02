@@ -20,25 +20,6 @@ body{
     margin:0 auto;
 }
 
-.btn, input,span{
-    padding: 10px;
-    width:150px;
-    border-radius: 5px;
-    border: 1px solid rgb(41, 85, 37);
-    background-color: white;
-}
-
-.btn:hover, input:hover,span:hover{
-    outline: none;
-    color:white;
-    background-color: rgb(41, 85, 37);
-}
-
-.btn:focus, input:focus{
-    outline: none;
-}
-
-
 .header{
     background-color: rgb(255, 255, 255);
 
@@ -64,6 +45,25 @@ body{
     margin:0 auto;
     min-height:100vh;
     text-align: center;
+
+    .btn, input,span{
+        padding: 10px;
+        width:150px;
+        border-radius: 5px;
+        border: 1px solid rgb(41, 85, 37);
+        background-color: white;
+    }
+    
+    .btn:hover, input:hover,span:hover{
+        outline: none;
+        color:white;
+        background-color: rgb(41, 85, 37);
+    }
+    
+    .btn:focus, input:focus{
+        outline: none;
+    }
+    
 
     &__wrapper{
         padding:50px 100px;

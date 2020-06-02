@@ -20,24 +20,6 @@ body {
   margin: 0 auto;
 }
 
-.btn, input, span {
-  padding: 10px;
-  width: 150px;
-  border-radius: 5px;
-  border: 1px solid #295525;
-  background-color: white;
-}
-
-.btn:hover, input:hover, span:hover {
-  outline: none;
-  color: white;
-  background-color: #295525;
-}
-
-.btn:focus, input:focus {
-  outline: none;
-}
-
 .header {
   background-color: white;
 }
@@ -58,6 +40,21 @@ body {
   margin: 0 auto;
   min-height: 100vh;
   text-align: center;
+}
+.content .btn, .content input, .content span {
+  padding: 10px;
+  width: 150px;
+  border-radius: 5px;
+  border: 1px solid #295525;
+  background-color: white;
+}
+.content .btn:hover, .content input:hover, .content span:hover {
+  outline: none;
+  color: white;
+  background-color: #295525;
+}
+.content .btn:focus, .content input:focus {
+  outline: none;
 }
 .content__wrapper {
   padding: 50px 100px;
