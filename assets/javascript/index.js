@@ -19,92 +19,129 @@ function openCarChooseWindow() {
   })
 }*/
 
+const airportFromInput = document.getElementsByClassName('content__choose_plane_dest-from')[0];
+airportFromInput.addEventListener('keypress', function(){
+  if(airportFromInput.value.length>2)
+      getAirports('destination-from', airportFromInput.value);
+});
 
-function addListEntry(list, element) {
-  let optionNode =  document.createElement("option");
-  optionNode.value = element.PlaceName;
-  optionNode.setAttribute('data-id',`${element.PlaceId}`)
-  optionNode.setAttribute('data-city',`${element.PlaceName}`)
-  optionNode.appendChild(document.createTextNode("Country: " + element.CountryName));
-  document.getElementById(list).appendChild(optionNode);
-}
+const airportToInput = document.getElementsByClassName('content__choose_plane_dest-to')[0];
+airportToInput.addEventListener('keypress', function(){
+  if(airportToInput.value.length>2)
+      getAirports('destination-to',airportToInput.value);
+});
 
 function getAirports(list, value){
-  let xhr = new XMLHttpRequest();
-  
-  xhr.open("GET", `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/autosuggest/v1.0/UK/GBP/en-GB/?query=${value}`);
-  xhr.setRequestHeader("x-rapidapi-host", "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com");
+  var xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === this.DONE) {
+      let response = JSON.parse(this.responseText);
+      console.log(response);
+      response.forEach(element => {
+        addListEntry(list, element)
+      })
+    }
+  });
+
+  xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/airports/search?locale=en_US&query=${value}`);
+  xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
   xhr.setRequestHeader("x-rapidapi-key", "cf75ecbd7dmsh76f1f68906a6bd8p1f9fccjsndbf26ec289ab");
 
-  xhr.onload = function() {
-    if (xhr.status >= 200 && xhr.status < 400){
-      let response = JSON.parse(this.responseText);
-      Object.values(response)[0].forEach(element => {
-          addListEntry(list, element);
-      });
-    }
-  };
   xhr.send();
 }
 
-let airportFrom = document.getElementsByClassName('content__choose_plane_dest-from')[0];
-airportFrom.addEventListener('keypress', function(){
-  if(airportFrom.value.length>1)
-      getAirports('destination-from', airportFrom.value);
-});
+function addListEntry(list, element) {
+  if(!checkOptionUnic(element)) return 0;
+  let optionNode =  document.createElement("option");
 
-let airportTo = document.getElementsByClassName('content__choose_plane_dest-to')[0];
-airportTo.addEventListener('keypress', function(){
-  if(airportTo.value.length>1)
-      getAirports('destination-to',airportTo.value);
-});
+  if(element.display_sub_title && element.display_sub_title.substring(0,3).toLowerCase()==='all'){
+      optionNode.value = element.city_name + ' (All airports)';
+  } else 
+    optionNode.value = element.city_name + ' ' + element.name;
 
+  optionNode.setAttribute('data-id',`${element.code}`)
+  optionNode.setAttribute('data-city',`${element.city_name}`)
+  optionNode.appendChild(document.createTextNode(element.time_zone_name + ' Country: ' +element.country_code));
+  document.getElementById(list).appendChild(optionNode);
+}
+
+function checkOptionUnic(element){
+  let option = document.getElementsByTagName('option');
+
+  for(let i=0;i<option.length;i++){
+    if(option[i].getAttribute('data-id')===element.code) return 0;
+  }
+  return 1;
+}
 
 /**ADDING EVENT LISTENERS ON BUTTON SEARCH FLIGHTS*/
 function openFlightSearchWindow() {
+  updateSearchFLightDom();
+
+  flightCreateSession();
+}
+
+function updateSearchFLightDom(){
   document.getElementsByClassName('content__choose')[0].style.display = "flex";
   document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
   document.getElementsByClassName('content__choose_car')[0].style.display = "none";
   document.getElementsByClassName('content-title')[0].style.display = "none";
   document.getElementsByClassName('content-subtitle')[0].style.display = "none";
   document.getElementsByClassName('content__transport_btns')[0].style.display="none";
+}
 
-  let idAirportFrom ="";
-  let idAirportTo ="";
-  let placeNameFrom = "";
-  let placeNameTo = "";
-  let dateFrom=document.getElementById('date_timepicker_start').value;
-  let dateTo=document.getElementById('date_timepicker_end').value;
-  let option = document.getElementsByTagName('option');
+function flightCreateSession() {
+  const flightFrom = getInfoAirportFrom();
+  const flightTo = getInfoAirportTo();
 
-  for(let i=0;i<option.length;i++){
-    if (option[i].value===airportFrom.value) {
-      idAirportFrom = option[i].getAttribute('data-id').toLowerCase();
-      placeNameFrom = option[i].getAttribute('data-city')
-    }
-    if (option[i].value===airportTo.value) {
-      idAirportTo = option[i].getAttribute('data-id').toLowerCase();
-      placeNameTo = option[i].getAttribute('data-city')
-    } 
-  }
-
-  var xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+  let xhr = new XMLHttpRequest();
 
   xhr.addEventListener("readystatechange", function () {
     if (this.readyState === this.DONE) {
       let response = JSON.parse(this.responseText);
-      createFlights(response,placeNameFrom,placeNameTo)
+      console.log(response)
+      //createFlights(response,flightFrom.placeName,flightTo.placeName)
     }
   });
 
-  // xhr.open("GET", `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/UA/uah/en-US/${idAirportFrom}/${idAirportTo}/${dateFrom}/${dateTo}`);
-  xhr.open("GET", `https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browseroutes/v1.0/UA/uah/en-US/kiev/pari/2020-12-12`);
+  //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=USD&ta=1&c=0&d1=CNX&o1=DMK&dd1=2020-12-05`);
+  xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=USD&ta=1&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
 
-  xhr.setRequestHeader("x-rapidapi-host", "skyscanner-skyscanner-flight-search-v1.p.rapidapi.com");
+  xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
   xhr.setRequestHeader("x-rapidapi-key", "cf75ecbd7dmsh76f1f68906a6bd8p1f9fccjsndbf26ec289ab");
 
   xhr.send();
+}
+
+function getInfoAirportFrom() {
+  const airportFrom = {};
+  let option = document.getElementsByTagName('option');
+
+  for(let i=0;i<option.length;i++){
+    if (option[i].value===airportFromInput.value) {
+      airportFrom.id = option[i].getAttribute('data-id');
+      airportFrom.placeName = option[i].getAttribute('data-city');
+      airportFrom.date = document.getElementById('date_timepicker_start').value;
+    }
+  }
+
+  return airportFrom;
+}
+
+function getInfoAirportTo() {
+  const airportTo = {};
+  let option = document.getElementsByTagName('option');
+
+  for(let i=0;i<option.length;i++){
+    if (option[i].value===airportToInput.value) {
+      airportTo.id = option[i].getAttribute('data-id');
+      airportTo.placeName = option[i].getAttribute('data-city');
+      airportTo.date = document.getElementById('date_timepicker_end').value;
+    }
+  }
+
+  return airportTo;
 }
 
 function createFlights(response,placeNameFrom,placeNameTo){
