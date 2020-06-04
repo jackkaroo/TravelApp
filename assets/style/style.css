@@ -12,6 +12,7 @@ h1, h2, p {
 
 body {
   margin: 0;
+  font-family: Calibri;
 }
 
 .wrapper {
@@ -41,20 +42,42 @@ body {
   min-height: 100vh;
   text-align: center;
 }
-.content .btn, .content input, .content span {
+.content button, .content input, .content span {
   padding: 10px;
   width: 150px;
   border-radius: 5px;
   border: 1px solid #295525;
   background-color: white;
 }
-.content .btn:hover, .content input:hover, .content span:hover {
+.content button:hover, .content input:hover, .content span:hover {
   outline: none;
   color: white;
   background-color: #295525;
 }
-.content .btn:focus, .content input:focus {
+.content button:focus, .content input:focus {
   outline: none;
+}
+.content__response {
+  width: 100%;
+  background-color: white;
+  padding: 30px 0;
+}
+.content__response-title h2 {
+  padding: 5px;
+  width: 70%;
+  margin: 0 auto;
+}
+.content__response-menubtn {
+  margin-bottom: 20px;
+}
+.content__response_quotes-wrapper {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+.content__response_quotes-item {
+  padding: 10px;
 }
 .content__wrapper {
   padding: 50px 100px;
@@ -64,12 +87,10 @@ body {
 .content-title {
   color: white;
   font-size: 70px;
-  font-family: Calibri;
 }
 .content-subtitle {
   color: white;
   font-size: 30px;
-  font-family: Calibri;
   margin-bottom: 20px;
 }
 .content__transport_btns {
@@ -84,6 +105,7 @@ body {
   display: none;
   /*display:flex;*/
   justify-content: center;
+  transition-duration: 0.2s;
 }
 .content__choose_plane {
   display: flex;
