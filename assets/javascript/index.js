@@ -1,19 +1,15 @@
 /**ADDING EVENT LISTENERS ON BUTTONS PLANE AND CAR*/
-document.getElementsByClassName('content__transport_btns-plane')[0].addEventListener('click', function(){
+function openFlightChooseWindow() {
   document.getElementsByClassName('content__choose')[0].style.display = "flex";
   document.getElementsByClassName('content__choose_car')[0].style.display = "none";
   document.getElementsByClassName('content__choose_plane')[0].style.display = "flex";
+}
 
-  
-})
-
-document.getElementsByClassName('content__transport_btns-car')[0].addEventListener('click', function(){
+function openCarChooseWindow() {
   document.getElementsByClassName('content__choose')[0].style.display = "flex";
   document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
   document.getElementsByClassName('content__choose_car')[0].style.display = "flex";
-
-  
-})
+}
 
 /*if(document.getElementsByClassName('content__response-menubtn')[0]) {
   document.getElementsByClassName('content__response-menubtn')[0].addEventListener('click',function(){
@@ -65,8 +61,7 @@ airportTo.addEventListener('keypress', function(){
 
 
 /**ADDING EVENT LISTENERS ON BUTTON SEARCH FLIGHTS*/
-document.getElementsByClassName('content__choose_plane-btn')[0].addEventListener('click', function(){
-  
+function openFlightSearchWindow() {
   document.getElementsByClassName('content__choose')[0].style.display = "flex";
   document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
   document.getElementsByClassName('content__choose_car')[0].style.display = "none";
@@ -110,7 +105,7 @@ document.getElementsByClassName('content__choose_plane-btn')[0].addEventListener
   xhr.setRequestHeader("x-rapidapi-key", "cf75ecbd7dmsh76f1f68906a6bd8p1f9fccjsndbf26ec289ab");
 
   xhr.send();
-})
+}
 
 function createFlights(response,placeNameFrom,placeNameTo){
   console.log(response)
