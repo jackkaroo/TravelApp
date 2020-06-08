@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "compile:sass": "sass assets/style/style.scss assets/style/style.css"
+    "compile:sass": "sass assets/style/style2.scss assets/style/style2.css"
+    
   },
   "author": "",
   "license": "ISC",
