@@ -136,3 +136,9 @@ body {
 }
 
 /*# sourceMappingURL=style.css.map */
+
+.content__response_car-map{
+  margin:0 auto;
+  width:600px;
+  height:300px;
+}

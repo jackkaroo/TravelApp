@@ -1,12 +1,69 @@
+const airportFromInput = document.getElementsByClassName('content__choose_plane_dest-from')[0];
+airportFromInput.addEventListener('keypress', function(){
+  if(airportFromInput.value.length>2)
+      getAirports('destination-from', airportFromInput.value);
+});
+
+const airportToInput = document.getElementsByClassName('content__choose_plane_dest-to')[0];
+airportToInput.addEventListener('keypress', function(){
+  if(airportToInput.value.length>2)
+      getAirports('destination-to',airportToInput.value);
+});
+
+function getAirports(list, value){
+  var xhr = new XMLHttpRequest();
+
+  xhr.addEventListener("readystatechange", function () {
+    if (this.readyState === this.DONE) {
+      let response = JSON.parse(this.responseText);
+      console.log(response);
+      response.forEach(element => {
+        addListEntry(list, element)
+      })
+    }
+  });
+
+  xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/airports/search?locale=en_US&query=${value}`);
+  xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
+  xhr.setRequestHeader("x-rapidapi-key", "cf75ecbd7dmsh76f1f68906a6bd8p1f9fccjsndbf26ec289ab");
+
+  xhr.send();
+}
+
+function addListEntry(list, element) {
+  if(!checkOptionUnic(element)) return 0;
+  let optionNode =  document.createElement("option");
+
+  if(element.display_sub_title && element.display_sub_title.substring(0,3).toLowerCase()==='all'){
+      optionNode.value = element.city_name + ' (All airports)';
+  } else 
+    optionNode.value = element.city_name + ' ' + element.name;
+
+  optionNode.setAttribute('data-id',`${element.code}`)
+  optionNode.setAttribute('data-city',`${element.city_name}`)
+  optionNode.appendChild(document.createTextNode(element.time_zone_name + ' Country: ' +element.country_code));
+  document.getElementById(list).appendChild(optionNode);
+}
+
+function checkOptionUnic(element){
+  let option = document.getElementsByTagName('option');
+
+  for(let i=0;i<option.length;i++){
+    if(option[i].getAttribute('data-id')===element.code) return 0;
+  }
+  return 1;
+}
+
+
 
 /**ADDING EVENT LISTENERS ON BUTTON SEARCH FLIGHTS*/
 function openFlightSearchWindow() {
-    updateSearchFLightDom();
+    updateSearchFlightDom();
   
     flightCreateSession();
   }
   
-  function updateSearchFLightDom(){
+  function updateSearchFlightDom(){
     document.getElementsByClassName('content__choose')[0].style.display = "flex";
     document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
     document.getElementsByClassName('content__choose_car')[0].style.display = "none";
@@ -24,7 +81,7 @@ function openFlightSearchWindow() {
     xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
         let response = JSON.parse(this.responseText);
-        console.log(response)
+        flightPoll(response);
         //createFlights(response,flightFrom.placeName,flightTo.placeName)
       }
     });
@@ -67,6 +124,46 @@ function openFlightSearchWindow() {
   
     return airportTo;
   }
+
+  function flightPoll(response){
+    console.log(response)
+
+    let xhr = new XMLHttpRequest();
+    
+    xhr.addEventListener("readystatechange", function () {
+        if (this.readyState === this.DONE) {
+            let responsePoll = JSON.parse(this.responseText);
+            console.log(responsePoll);
+            getBookData(responsePoll);
+            
+        }
+    });
+    
+    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/poll?currency=USD&n=15&ns=NON_STOP%252CONE_STOP&so=PRICE&o=0&sid=${response.search_params.sid}`);
+    xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "cf75ecbd7dmsh76f1f68906a6bd8p1f9fccjsndbf26ec289ab");
+    
+    xhr.send();
+  }
+
+  function getBookData(responsePoll){
+    
+    var xhr = new XMLHttpRequest();
+
+    xhr.addEventListener("readystatechange", function () {
+      if (this.readyState === this.DONE) {
+        let responseBook = JSON.parse(this.responseText);
+        console.log(responseBook.partner_url);
+      }
+    });
+
+    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/get-booking-url?searchHash=${responsePoll.summary.sh}&Dest=VIE&id=${responsePoll.itineraries[0].l[0].id}&Orig=KBP&searchId=${responsePoll.search_params.sid}`);
+    xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "cf75ecbd7dmsh76f1f68906a6bd8p1f9fccjsndbf26ec289ab");
+
+    xhr.send();
+  }
+
   
   function createFlights(response,placeNameFrom,placeNameTo){
     console.log(response)
