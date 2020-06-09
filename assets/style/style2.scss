@@ -45,6 +45,17 @@ button:focus, input:focus{
 }
 
 .button {
+  border: 1px solid #B49565;
+  background: none;
+  width: 180px;
+  text-align: center;
+  padding: 10px 0;
+
+  color:#FFFFFF;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+
   &-text {
     margin-right: 8px;
 
@@ -56,6 +67,32 @@ button:focus, input:focus{
     text-transform: uppercase;
     color: #B49565;
   }
+}
+
+input {
+  padding-bottom: 6px;
+  margin-bottom: 20px;
+
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgb(255, 255, 255, 0.7);
+
+  font-family: 'Roboto';
+  font-size: 14px;
+  color: #FFFFFF;
+
+  &::placeholder{
+    font-family: 'Roboto';
+    font-size: 14px;
+    color: #FFFFFF;
+    opacity: 0.7;
+  }
+}
+
+abbr {
+  border-bottom: none !important;
+  cursor: inherit !important;
+  text-decoration: none !important
 }
 
 .container {
@@ -120,9 +157,6 @@ button:focus, input:focus{
       font-size: 16px;
       line-height: 19px;
       opacity: 0.7;
-
-      &-text {
-      }
 
       &-author {
         text-align: end;
@@ -190,36 +224,124 @@ button:focus, input:focus{
     &_plane{
         display:flex;
         flex-direction: column;
-        padding-top:150px;
+        padding-top:70px;
 
-        &_dest{
-          margin-bottom: 10px;
-          &-from{
-              margin-right: 20px;
-          }
-        }
-
-        &_date{
-          margin-bottom: 10px;
-        
-          &-from{
-            margin-right: 20px;
-          }
-        }
-      
-        &-person{
-          width:100%;
-          margin: 0 auto;
-          margin-bottom: 10px;
+        &_items {
           display:flex;
-          justify-content: space-between;
-          cursor: context-menu;
+          flex-wrap: wrap;
+          align-items: flex-end;
+          margin-bottom: 20px;
         }
 
-        &-btn{
-          margin: 0 auto;
+        &_item {
+          max-width: 180px;
+          margin-right: 30px;
+
+          &:last-of-type {
+            margin-right:0;
+          }
+        }
+
+        & input {
+          width:180px;
+          margin:0;
+          font-weight: 300;
+          text-transform: uppercase;
         }
       }     
+    }
+
+    &__response {
+      display:none;
+      padding-top:70px;
+
+      &_flight {
+        display:none;
+
+        &_title {
+          font-size: 40px;
+          text-align: center;
+        }
+
+        &_item {
+          padding-top: 35px;
+          &_ticket {
+            border-top: 1px solid rgba(255, 255, 255, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+            margin-bottom: 35px;
+
+            &--wrapper {
+              padding:40px 25px;
+              display:flex;
+              justify-content: space-between;
+              align-items: center;
+            }
+
+            &--date {
+              max-width:112px;
+              margin-right: 70px;
+              font-weight: 300;
+              font-size: 16px;
+              line-height: 19px;
+            }
+
+            &--flight {
+              margin-right:20px;
+
+              &-1 {
+                margin-right: 70px;
+              }
+
+              &-time {
+                font-weight: 300;
+                font-size: 16px;
+                margin-bottom: 8px;
+              }
+
+              &-airport{
+                font-family: 'Cormorant';
+                font-size: 22px;
+                text-transform: uppercase;
+
+                & abbr {
+                  opacity: 0.7;
+                }
+              }
+            }
+
+            &--price {
+              text-align: end;
+              font-weight: 300;
+              font-size: 20px;
+              & span {
+                font-size: 15px;
+                font-variant: small-caps;
+                opacity: 0.7;
+
+                &:last-of-type {
+                  font-size: 15px;
+                  text-transform: uppercase;
+                  opacity: 1;
+                }
+              }
+            }
+
+            &--carrier {
+              font-weight: 300;
+              font-size: 16px;
+              margin-right: 70px;
+            }
+          }
+
+          &_button {
+            display:flex;
+            justify-content: flex-end;
+
+          }
+        }
+        
+      }
+
     }
 }
 
@@ -298,25 +420,8 @@ button:focus, input:focus{
       max-width: 225px;
       margin-right: 73px;
 
-      & input {
-        padding-bottom: 6px;
-        margin-bottom: 20px;
-
-        background: transparent;
-        border: none;
-        border-bottom: 1px solid rgb(255, 255, 255, 0.7);
-
-        font-family: 'Roboto';
-        font-size: 14px;
-        color: #FFFFFF;
-
-        &::placeholder{
-          font-family: 'Roboto';
-          font-size: 14px;
-          color: #FFFFFF;
-          opacity: 0.7;
-        }
-      }
+      
+      
 
       &-title {
         margin-bottom: 21px;
@@ -330,7 +435,4 @@ button:focus, input:focus{
       max-width:300px;
     }
   }
-
-  
-
 }

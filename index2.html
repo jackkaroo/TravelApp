@@ -55,19 +55,36 @@
         
         <!--PLANE-->
         <div class="content__choose_plane">
-          <div class="content__choose_plane_dest">
-            <input type ="text" list="destination-from" class="content__choose_plane_dest-from" spellcheck="false" placeholder="Origin">
-            <datalist id="destination-from"></datalist>
-            <input type ="text" list="destination-to" class="content__choose_plane_dest-to" spellcheck="false" placeholder="Destination">
-            <datalist id="destination-to"></datalist>
+          <div class="content__choose_plane_items">
+            <div class="content__choose_plane_item">
+              <input type ="text" list="destination-from" class="content__choose_plane_dest-from" spellcheck="false" placeholder="Origin">
+              <datalist id="destination-from"></datalist>
+            </div>
+            
+            <div class="content__choose_plane_item">
+              <input type ="text" list="destination-to" class="content__choose_plane_dest-to content__choose_plane_item" spellcheck="false" placeholder="Destination">
+              <datalist id="destination-to"></datalist>
+            </div>
+            
+            <div class="content__choose_plane_item">
+              <input type="number" class="content__choose_plane-person content__choose_plane_item" placeholder="Passengers">
+            </div>
           </div>
-          <div class="content__choose_plane_date">
-            <input class="content__choose_plane_date-from" id="date_timepicker_start" type="text" spellcheck="false" placeholder="Departure" autocomplete="off">
-            <input class="content__choose_plane_date-to" id="date_timepicker_end" type="text" spellcheck="false" placeholder="Return" autocomplete="off">
+
+          <div class="content__choose_plane_items">
+            <div class="content__choose_plane_item">
+              <input class="content__choose_plane_date-from content__choose_plane_item" id="date_timepicker_start" type="text" spellcheck="false" placeholder="Departure" autocomplete="off">
+
+            </div>         
+            <div class="content__choose_plane_item">
+              <input class="content__choose_plane_date-to content__choose_plane_item" id="date_timepicker_end" type="text" spellcheck="false" placeholder="Return" autocomplete="off">
+
+            </div>        
+            <div class="content__choose_plane_item">
+              <button class="content__choose_plane-btn content__choose_plane_item" onclick="openFlightSearchWindow()">Search</button>
+
+            </div>           
           </div>
-                  
-          <input type="number" class="content__choose_plane-person" placeholder="Passengers">
-          <button class="content__choose_plane-btn btn" onclick="openFlightSearchWindow()">Search</button>                          
         </div>
 
         <!--CAR-->
@@ -81,6 +98,14 @@
           <button class="content__choose_car-btn btn" onclick="openMapSearchWindow()">Search</button>                          
         </div> 
 
+      </div>
+
+      <div class="content__response">
+        <div class="content__response_flight">
+          <div class="content__response_flight_items">
+            <h3 class="content__response_flight_title">best options</h3>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -143,6 +168,12 @@
 <link rel="stylesheet" type="text/css" href="assets/style/jquery.datetimepicker.css">
 <script src="assets/jquery/jquery.js"></script>
 <script src="assets/jquery/build/jquery.datetimepicker.full.min.js"></script>
+
+<link href="assets/style/datepicker.css" rel="stylesheet">
+<script src="assets/jquery/jquery.js"></script>
+<script src="dist/js/datepicker.js"></script>
+
+
 <script src="assets/javascript/index_jquery.js"></script>
 <script src="assets/javascript/index.js"></script>
 
