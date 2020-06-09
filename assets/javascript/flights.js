@@ -144,10 +144,10 @@ function openFlightSearchWindow() {
     
     xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
-            let responsePoll = JSON.parse(this.responseText);
-            console.log(responsePoll);
-            createFlightsOption(responsePoll);
-            //getBookData(responsePoll);
+          let responsePoll = JSON.parse(this.responseText);
+          console.log(responsePoll);
+          createFlightsOption(responsePoll);
+          //getBookData(responsePoll);
         }
     });
     
@@ -181,11 +181,41 @@ function openFlightSearchWindow() {
   function createFlightsOption(response) {
     let itineraries = response.itineraries;
     if(!itineraries) return 0;
+
+    let wrapperFirst = document.createElement('div');
+    wrapperFirst.classList.add('content__response_flight_items--wrapper-first')
+    document.getElementsByClassName('content__response_flight_items')[0].appendChild(wrapperFirst);
+
+    if (itineraries.length>3) addFlightsToDom(0, 3, wrapperFirst, response);
+    else addFlightsToDom(0, itineraries.length, wrapperFirst, response);
+    
+    let buttonShow = document.createElement('a');
+    buttonShow.classList.add('button-text');
+    buttonShow.innerHTML = "show all";
+    document.getElementsByClassName('content__response_flight_items')[0].appendChild(buttonShow)
+    buttonShow.addEventListener('click', function() {
+      buttonShow.innerHTML = "hide";
+      if(document.getElementsByClassName('content__response_flight_items--wrapper-second').length) {
+        document.getElementsByClassName('content__response_flight_items')[0].removeChild(document.getElementsByClassName('content__response_flight_items--wrapper-second')[0]);
+        buttonShow.innerHTML = "show all";
+      } 
+      else {
+        let wrapperSecond = document.createElement('div');
+        wrapperSecond.classList.add('content__response_flight_items--wrapper-second')
+        document.getElementsByClassName('content__response_flight_items')[0].appendChild(wrapperSecond);
+        addFlightsToDom(3,itineraries.length,wrapperSecond,response );
+    }
+    })
+  }
+
+  function addFlightsToDom(min,max,wrapper,response) {
+    let itineraries = response.itineraries;
+    if(!itineraries) return 0;
     let airportMap = getResponseFlightAirportMap(response);
     let planeMap = getResponseFlightPlaneMap(response);
     let carriersMap = getResponseFlightCarriersMap(response);
 
-    for(let i=0;i<itineraries.length;i++){
+    for(let i=min;i<max;i++){
       
       let obj = itineraries[i];
       
@@ -199,14 +229,11 @@ function openFlightSearchWindow() {
       let carrierAirCompanyId = obj.f[0].l[0].m; //find by id name and image
       let carrierCompany = obj.l[0].s; //always cheap one
 
-
-
       let price = obj.l[0].pr.p; //in usd
       
-
       let optionWrapper = document.createElement('div');
       optionWrapper.classList.add('content__response_flight_item')
-      document.getElementsByClassName('content__response_flight_items')[0].appendChild(optionWrapper)
+      wrapper.appendChild(optionWrapper)
 
       let optionTicket = document.createElement('div');
       optionTicket.classList.add('content__response_flight_item_ticket')
@@ -230,7 +257,6 @@ function openFlightSearchWindow() {
 
       /**<!--<div class="content__response_flight_item_ticket--carrier-plane">${carriersMap.get(carrierPlaneId)[0]}</div>
           <div class="content__response_flight_item_ticket--carrier-company">${carrierCompany}</div>--> */
-
 
       let optionButton = document.createElement('div');
       optionButton.classList.add('content__response_flight_item_button')

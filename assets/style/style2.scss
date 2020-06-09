@@ -263,6 +263,16 @@ abbr {
           text-align: center;
         }
 
+        &_items {
+          
+          .button-text {
+            text-align: center;
+            font-family: 'Cormorant';
+            font-weight: 600;
+            font-size: 30px;
+          }
+        }
+
         &_item {
           padding-top: 35px;
           &_ticket {
