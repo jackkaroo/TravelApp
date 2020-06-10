@@ -1,6 +1,5 @@
 const google_api_key = "AIzaSyBo1lmywIKGe9S2a_X9KDY9k37dfHGo3AQ";
  let map;
- let directionsRenderer ;
 
 //____CONNECT__TO__GOOGLE_MAPS_API___AND__ENABLE__SEARCH FIELEDS 
 var script = document.createElement('script');
@@ -98,7 +97,6 @@ let directionsResult;
 
 
   directionsDisplay.setMap(map);
-  directionsRenderer.setMap(map);
 
 
   directionsService.route({
@@ -108,15 +106,14 @@ let directionsResult;
   }, function(response, status) {
     if (status === 'OK') {
       directionsDisplay.setDirections(response);
-      directionsRenderer.setDirections(response);
       legs = response.routes[0].legs; 
       console.log(response);
   for(var i=0; i<legs.length; ++i) {
       totalDistance += legs[i].distance.value;
       totalDuration += legs[i].duration.value;
   }
-  console.log((totalDistance));
-  console.log((totalDuration));
+  console.log((totalDistance/1000));
+  console.log((totalDuration/3600));
     } else {
       window.alert('Directions request failed due to ' + status);
     }
