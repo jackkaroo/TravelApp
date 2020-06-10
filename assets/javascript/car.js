@@ -3,7 +3,7 @@ const google_api_key = "AIzaSyBo1lmywIKGe9S2a_X9KDY9k37dfHGo3AQ";
 
 //____CONNECT__TO__GOOGLE_MAPS_API___AND__ENABLE__SEARCH FIELEDS 
 var script = document.createElement('script');
-script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBo1lmywIKGe9S2a_X9KDY9k37dfHGo3AQ&libraries=places&callback=initMap";
+script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBo1lmywIKGe9S2a_X9KDY9k37dfHGo3AQ&libraries=places&callback=initMap&language=en&region=UA";
 script.defer = true;
 script.async = true;
 
@@ -56,19 +56,9 @@ function openMapSearchWindow(){
 function updateSearchCarDom() {
   document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
 
-  /*let mapDiv = document.createElement('div');
-  mapDiv.classList.add('content__response_car-map');
-  mapDiv.id = ('map');
-  document.getElementsByClassName('content__wrapper')[0].appendChild(mapDiv)*/
 
 }
 
-function addProperties(distance, time){
-
-  let element = document.getElementById('map-properties');
-  element.append(distance/1000);
-  element.append(time/3600);
-}
 
 function calculateAndDisplayRoute() {
 let directionsResult;
