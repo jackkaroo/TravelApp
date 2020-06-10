@@ -1,250 +1,71 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
 
-</head>
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+</style>
 <body>
-  <input type='text' id='start' class="form-control">
-  <input type='text' id='end'>
+
+<h1>Custom Checkboxes</h1>
+
+<label class="container">One
+  <input type="checkbox">
+  <span class="checkmark"></span>
+</label>
 
 </body>
-
-
-<link href="assets/style/datepicker.css" rel="stylesheet">
-<script src="assets/jquery/jquery.js"></script>
-<script src="assets/jquery/datepicker.js"></script>
-
-<script>
-  
-
-
-</script>
-
-<!-- <script>
-  $('#start').datepicker({
-
-// inline mode
-inline: false,
-
-// additional CSS class
-classes: '',
-
-// language
-language: 'ua',
-
-// start date
-startDate: new Date(),
-
-// first day
-firstDay: '',
-
-// array of day's indexes
-weekends: [6, 0],
-
-// custom date format
-dateFormat: '',
-
-// Alternative text input. Use altFieldDateFormat for date formatting.
-altField: '',
-
-// Date format for alternative field.
-altFieldDateFormat: '@',
-
-// remove selection when clicking on selected cell
-toggleSelected: true,
-
-// keyboard navigation
-keyboardNav: true,
-
-// position
-position: 'bottom left',
-offset: 12,
-
-// days, months or years
-view: 'days',
-minView: 'days',
-
-showOtherMonths: true,
-selectOtherMonths: true,
-moveToOtherMonthsOnSelect: true,
-
-showOtherYears: true,
-selectOtherYears: true,
-moveToOtherYearsOnSelect: true,
-
-minDate: '',
-maxDate: $('#end').val(),
-disableNavWhenOutOfRange: true,
-
-multipleDates: false, // Boolean or Number
-multipleDatesSeparator: ',',
-range: false,
-
-// display today button
-todayButton: true,
-
-// display clear button
-clearButton: true,
-
-// Event type
-showEvent: 'focus',
-
-// auto close after date selection
-autoClose: false,
-
-// navigation
-monthsFiled: 'monthsShort',
-prevHtml: '<svg><path d="M 17,12 l -5,5 l 5,5"></path></svg>',
-nextHtml: '<svg><path d="M 14,12 l 5,5 l -5,5"></path></svg>',
-navTitles: {
-    days: 'MM, <i>yyyy</i>',
-    months: 'yyyy',
-    years: 'yyyy1 - yyyy2'
-},
-
-// timepicker
-timepicker: false,
-onlyTimepicker: false,
-dateTimeSeparator: ' ',
-timeFormat: '',
-minHours: 0,
-maxHours: 24,
-minMinutes: 0,
-maxMinutes: 59,
-hoursStep: 1,
-minutesStep: 1,
-
-// callback events
-onSelect: '',
-onShow: '',
-onHide: '',
-onChangeMonth: '',
-onChangeYear: '',
-onChangeDecade: '',
-onChangeView: '',
-onRenderCell: ''
-
-})
-
-$('#end').datepicker({
-
-// inline mode
-inline: false,
-
-// additional CSS class
-classes: '',
-
-// language
-language: 'ua',
-
-// start date
-startDate: new Date(),
-
-// first day
-firstDay: '',
-
-// array of day's indexes
-weekends: [6, 0],
-
-// custom date format
-dateFormat: '',
-
-// Alternative text input. Use altFieldDateFormat for date formatting.
-altField: '',
-
-// Date format for alternative field.
-altFieldDateFormat: '@',
-
-// remove selection when clicking on selected cell
-toggleSelected: true,
-
-// keyboard navigation
-keyboardNav: true,
-
-// position
-position: 'bottom left',
-offset: 12,
-
-// days, months or years
-view: 'days',
-minView: 'days',
-
-showOtherMonths: true,
-selectOtherMonths: true,
-moveToOtherMonthsOnSelect: true,
-
-showOtherYears: true,
-selectOtherYears: true,
-moveToOtherYearsOnSelect: true,
-
-minDate: $('#start').val(),
-maxDate: '',
-disableNavWhenOutOfRange: true,
-
-multipleDates: false, // Boolean or Number
-multipleDatesSeparator: ',',
-range: false,
-
-// display today button
-todayButton: true,
-
-// display clear button
-clearButton: true,
-
-// Event type
-showEvent: 'focus',
-
-// auto close after date selection
-autoClose: false,
-
-// navigation
-monthsFiled: 'monthsShort',
-prevHtml: '<svg><path d="M 17,12 l -5,5 l 5,5"></path></svg>',
-nextHtml: '<svg><path d="M 14,12 l 5,5 l -5,5"></path></svg>',
-navTitles: {
-    days: 'MM, <i>yyyy</i>',
-    months: 'yyyy',
-    years: 'yyyy1 - yyyy2'
-},
-
-// timepicker
-timepicker: false,
-onlyTimepicker: false,
-dateTimeSeparator: ' ',
-timeFormat: '',
-minHours: 0,
-maxHours: 24,
-minMinutes: 0,
-maxMinutes: 59,
-hoursStep: 1,
-minutesStep: 1,
-
-// callback events
-onSelect: '',
-onShow:function(ct){this.setOptions({minDate:$('#start').val()?$('#start').val():false})},
-onHide: '',
-onChangeMonth: '',
-onChangeYear: '',
-onChangeDecade: '',
-onChangeView: '',
-onRenderCell: ''
-
-})
-</script>
-
-<script>
-  $('start').datepicker({
-        format:'Y-m-d',
-        onShow:function(ct){this.setOptions({ minDate:0,maxDate:jQuery('#end').val()?jQuery('#end').val():false})},
-        timepicker:false
-    });
-
-    $('end').datetimepicker({
-        format:'Y-m-d',
-        onShow:function(ct){this.setOptions({minDate:jQuery('#start').val()?jQuery('#start').val():false})},
-        timepicker:false
-    });
-</script> -->
-
 </html>

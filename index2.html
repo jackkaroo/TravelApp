@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="assets/style/style2.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
   <title>Document</title>
 </head>
@@ -22,8 +23,8 @@
     </div>
   </header>
 
-  <section class="hero">
-    <div class="container">
+  <section class="hero" data-aos="zoom-in">
+    <div class="container" >
       <div class="hero-wrapper">
       <div class="hero__info">
         <h1 class="hero__info_title">WORLD</h1>
@@ -54,7 +55,7 @@
       <div class="content__choose">
         
         <!--PLANE-->
-        <div class="content__choose_plane">
+        <div class="content__choose_plane" >
           <div class="content__choose_plane_items">
             <div class="content__choose_plane_item">
               <input type ="text" list="destination-from" class="content__choose_plane_dest-from" spellcheck="false" placeholder="Origin">
@@ -62,40 +63,49 @@
             </div>
             
             <div class="content__choose_plane_item">
-              <input type ="text" list="destination-to" class="content__choose_plane_dest-to content__choose_plane_item" spellcheck="false" placeholder="Destination">
+              <input type ="text" list="destination-to" class="content__choose_plane_dest-to" spellcheck="false" placeholder="Destination">
               <datalist id="destination-to"></datalist>
             </div>
             
             <div class="content__choose_plane_item">
-              <input type="number" class="content__choose_plane-person content__choose_plane_item" placeholder="Passengers">
+              <input type="number" class="content__choose_plane-person" placeholder="Passengers">
             </div>
           </div>
 
           <div class="content__choose_plane_items">
             <div class="content__choose_plane_item">
-              <input class="content__choose_plane_date-from content__choose_plane_item" id="date_picker_start"  type="text" spellcheck="false" placeholder="Departure" autocomplete="off">
+              <input class="content__choose_plane_date-from" id="date_picker_start"  type="text" spellcheck="false" placeholder="Departure" autocomplete="off">
         
             </div>         
-            <div class="content__choose_plane_item">
-              <input class="content__choose_plane_date-to content__choose_plane_item" id="date_picker_end" type="text" spellcheck="false" placeholder="Return" autocomplete="off">
-
+            <div class="content__choose_plane_item content__choose_plane_item-direct">
+              
+              <!--<input class="content__choose_plane_date-to" id="date_picker_end" type="text" spellcheck="false" placeholder="Return" autocomplete="off">-->
+              <input type="checkbox" id="direct_flight" class="content__choose_plane_direct-radio">
+              <label for="direct_flight" class="content__choose_plane_direct-label">Direct flights only</label>
             </div>        
             <div class="content__choose_plane_item">
-              <button class="content__choose_plane-btn content__choose_plane_item" onclick="openFlightSearchWindow()">Search</button>
-
+              <button class="content__choose_plane-btn" onclick="openFlightSearchWindow()">Search</button>
             </div>           
           </div>
         </div>
+      
 
         <!--CAR-->
-        <div class="content__choose_car"  >
-          <div class="content__choose_car_dest">
+        <div class="content__choose_car">
+
+          <div class="content__choose_car_items">
+            <div class="content__choose_car_item">
               <input type ="text" list="destination-from" class="content__choose_car_dest-from" spellcheck="false" placeholder="Origin">
               <datalist id="destination-from"></datalist>
+            </div>         
+            <div class="content__choose_сar_item">
               <input type ="text" list="destination-to" class="content__choose_car_dest-to" spellcheck="false" placeholder="Destination">
               <datalist id="destination-to"></datalist>
+            </div>        
+            <div class="content__choose_car_item">
+              <button class="content__choose_car-btn" onclick="openMapSearchWindow()">Search</button>                          
+            </div>           
           </div>
-          <button class="content__choose_car-btn btn" onclick="openMapSearchWindow()">Search</button>                          
         </div> 
 
       </div>
@@ -162,8 +172,10 @@
       </div>      
     </div>
   </footer>
-
 </body>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>AOS.init();</script>
 
 <link href="assets/style/datepicker.css" rel="stylesheet">
 <script src="assets/jquery/jquery.js"></script>
@@ -174,4 +186,5 @@
 <script src="assets/javascript/index.js"></script>
 
 <script src="assets/javascript/flights.js"></script>
+<script src="assets/javascript/flights_response.js"></script>
 </html>

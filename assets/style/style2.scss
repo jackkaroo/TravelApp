@@ -11,14 +11,18 @@ h1,h2,h3,h4{
   font-style: normal;
   font-weight: bold;
   text-transform: uppercase;
-  
 }
 
 body{
+  cursor: default;
   margin:0;
   font-family: 'Roboto', sans-serif;
   background: rgba(44, 67, 80, 0.94);
   color: #FFFFFF;
+}
+
+a {
+  cursor: pointer;
 }
 
 button {
@@ -217,12 +221,40 @@ abbr {
   }
 
   &__choose{
-    display:none;
-    /*display:flex;*/
+    display:flex;
     justify-content: center;
 
-    &_plane{
+    &_car {
+      display: none;
+      flex-direction: column;
+      padding-top:70px;
+
+      &_items {
         display:flex;
+        flex-wrap: wrap;
+        align-items: flex-end;
+        margin-bottom: 20px;
+      }
+
+      &_item {
+        max-width: 180px;
+        margin-right: 30px;
+
+        &:last-of-type {
+          margin-right:0;
+        }
+      }
+
+      & input {
+        width:180px;
+        margin:0;
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+    }
+
+    &_plane{
+        display:none;
         flex-direction: column;
         padding-top:70px;
 
@@ -233,21 +265,45 @@ abbr {
           margin-bottom: 20px;
         }
 
-        &_item {
-          max-width: 180px;
-          margin-right: 30px;
-
-          &:last-of-type {
-            margin-right:0;
-          }
-        }
-
         & input {
           width:180px;
           margin:0;
           font-weight: 300;
           text-transform: uppercase;
         }
+
+        &_item {
+          max-width: 180px;
+          margin-right: 30px;
+
+          &-direct {
+            width:180px;
+            display:flex;
+            flex-direction: row;
+            align-items: center;
+
+            & input {
+              width:20px;
+              margin-right: 7px;
+
+              &:checked {
+                background-color: red;
+              }
+            }
+
+            & label {
+              opacity: .7;
+              font-size: 13px;
+              font-weight: 300;
+            }
+          }
+
+          &:last-of-type {
+            margin-right:0;
+          }
+        }
+
+
       }     
     }
 
