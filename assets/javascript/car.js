@@ -48,28 +48,18 @@ function searchBox(input){
         });
       }
 
-
-
-
-
-
 function openMapSearchWindow(){
   updateSearchCarDom();
   calculateAndDisplayRoute();
 }
 
 function updateSearchCarDom() {
-  document.getElementsByClassName('content__choose')[0].style.display = "flex";
   document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
-  document.getElementsByClassName('content-title')[0].style.display = "none";
-  document.getElementsByClassName('content-subtitle')[0].style.display = "none";
-  document.getElementsByClassName('content__transport_btns')[0].style.display="none";
 
-  let mapDiv = document.createElement('div');
+  /*let mapDiv = document.createElement('div');
   mapDiv.classList.add('content__response_car-map');
   mapDiv.id = ('map');
-  document.getElementsByClassName('content__wrapper')[0].appendChild(mapDiv)
-
+  document.getElementsByClassName('content__wrapper')[0].appendChild(mapDiv)*/
 
 }
 
