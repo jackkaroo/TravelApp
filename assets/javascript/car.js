@@ -56,9 +56,15 @@ function openMapSearchWindow(){
 function updateSearchCarDom() {
   document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
 
+  document.getElementsByClassName('content__response')[0].style.display = "block";
+  document.getElementsByClassName('content__response_car')[0].style.display = "block";
+
+  let mapDiv = document.createElement('div');
+  mapDiv.classList.add('content__response_car_map');
+  mapDiv.id = ('map');
+  document.getElementsByClassName('content__response_car-wrapper')[0].appendChild(mapDiv)
 
 }
-
 
 function calculateAndDisplayRoute() {
 let directionsResult;

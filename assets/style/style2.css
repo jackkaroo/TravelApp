@@ -258,6 +258,16 @@ abbr {
   display: none;
   padding-top: 70px;
 }
+.content__response_car #map-properties {
+  margin: 0 auto;
+  width: 600px;
+  height: 100px;
+}
+.content__response_car_map {
+  margin: 0 auto;
+  width: 600px;
+  height: 300px;
+}
 .content__response_flight {
   display: none;
 }

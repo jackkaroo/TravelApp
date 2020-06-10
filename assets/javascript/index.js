@@ -13,6 +13,7 @@ function openFlightChooseWindow() {
 
 function openCarChooseWindow() {
   document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
+  document.getElementsByClassName('content__response')[0].style.display = "none";
 
   let carWrapper = document.createElement('div');
   carWrapper.classList.add('content__choose_car-wrapper');

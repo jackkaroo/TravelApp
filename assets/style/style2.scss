@@ -311,6 +311,21 @@ abbr {
       display:none;
       padding-top:70px;
 
+      &_car {
+        display:none;
+        #map-properties {
+          margin:0 auto;
+          width:600px;
+          height:100px;
+        }
+
+        &_map {
+          margin:0 auto;
+          width:600px;
+          height:300px;
+        }
+      }
+
       &_flight {
         display:none;
 
