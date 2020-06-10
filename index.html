@@ -53,13 +53,14 @@
             
             <div class="content__choose_car"  >
               <div class="content__choose_car_dest">
-                  <input type ="text" list="destination-from" class="content__choose_car_dest-from" spellcheck="false" placeholder="Origin">
-                  <datalist id="destination-from"></datalist>
-                  <input type ="text" list="destination-to" class="content__choose_car_dest-to" spellcheck="false" placeholder="Destination">
-                  <datalist id="destination-to"></datalist>
+                  <input type ="text" list="destination-from-car" class="content__choose_car_dest-from" spellcheck="false" placeholder="Origin">
+                  <datalist id="destination-from-car"></datalist>
+                  <input type ="text" list="destination-to-car" class="content__choose_car_dest-to" spellcheck="false" placeholder="Destination">
+                  <datalist id="destination-to-car"></datalist>
               </div>
               <button class="content__choose_car-btn btn" onclick="openMapSearchWindow()">Search</button>                          
             </div> 
+         
               
           </div>
 
@@ -77,6 +78,6 @@
 <script src="assets/javascript/flights.js"></script>
 
 <script src="assets/javascript/car.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo1lmywIKGe9S2a_X9KDY9k37dfHGo3AQ&callback=initMap"
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBo1lmywIKGe9S2a_X9KDY9k37dfHGo3AQ"
                 async defer></script>
 </html>
