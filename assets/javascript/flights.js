@@ -109,5 +109,4 @@ function openFlightSearchWindow() {
     return airportTo;
   }
 
-  function flightCreateSession() {
  
