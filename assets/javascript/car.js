@@ -2,45 +2,56 @@ const google_api_key = "AIzaSyBo1lmywIKGe9S2a_X9KDY9k37dfHGo3AQ";
  let map;
  let directionsRenderer ;
 
-const placeFromInput = document.getElementsByClassName('content__choose_car_dest-from')[0];
-placeFromInput.addEventListener('keypress', function(){
-  if(placeFromInput.value.length>1)
-      getPlaces('destination-from-car', placeFromInput.value);
-});
+//____CONNECT__TO__GOOGLE_MAPS_API___AND__ENABLE__SEARCH FIELEDS 
+var script = document.createElement('script');
+script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBo1lmywIKGe9S2a_X9KDY9k37dfHGo3AQ&libraries=places&callback=initMap";
+script.defer = true;
+script.async = true;
 
-const placeToInput = document.getElementsByClassName('content__choose_car_dest-to')[0];
-placeToInput.addEventListener('keypress', function(){
-  if(placeToInput.value.length>1)
-      getPlaces('destination-to-car',placeToInput.value);
-});
+// Attach your callback function to the `window` object
+window.initMap = function() {
+  const placeFromInput = document.getElementsByClassName('content__choose_car_dest-from')[0];
+  const placeToInput = document.getElementsByClassName('content__choose_car_dest-to')[0];
+this.searchBox(placeToInput);
+this.searchBox(placeFromInput);
 
-function getPlaces(list, query){ 
-  let service = new google.maps.places.PlacesService(map);
+};
+document.head.appendChild(script);
+//___________________________________________________________________________
 
-  service.findPlaceFromQuery(query, function(results, status) {
-      if (status === google.maps.places.PlacesServiceStatus.OK) {
-          for (var i = 0; i < results.length; i++) {
-        addListEntry(list,results[i]);
-        console.log(results[i])
-    }
-  }
-});}
+function searchBox(input){
+      var searchBox = new google.maps.places.SearchBox(input);
+     searchBox.addListener('places_changed', function() {
+      var places = searchBox.getPlaces();
+
+      if (places.length == 0) {
+        return;
+      }
+ 
+
+          // For each place, get the icon, name and location.
+          //var bounds = new google.maps.LatLngBounds();
+          places.forEach(function(place) {
+            if (!place.geometry) {
+              console.log("Returned place contains no geometry");
+              return;
+            }
+            var icon = {
+              url: place.icon,
+              size: new google.maps.Size(71, 71),
+              origin: new google.maps.Point(0, 0),
+              anchor: new google.maps.Point(17, 34),
+              scaledSize: new google.maps.Size(25, 25)
+            };
+          
+          });
+   
+        });
+      }
 
 
-function addListEntry(list, element) {
-  if(!checkOptionUnic(element)) return 0;
-  let optionNode =  document.createElement("option");
 
-  if(element.display_sub_title && element.display_sub_title.substring(0,3).toLowerCase()==='all'){
-      optionNode.value = element.city_name + ' (All)';
-  } else 
-    optionNode.value = element.city_name + ' ' + element.name;
 
-  optionNode.setAttribute('data-id',`${element.code}`)
-  optionNode.setAttribute('data-city',`${element.city_name}`)
-  optionNode.appendChild(document.createTextNode(element.time_zone_name + ' Country: ' +element.country_code));
-  document.getElementById(list).appendChild(optionNode);
-}
 
 
 function openMapSearchWindow(){
@@ -59,6 +70,15 @@ function updateSearchCarDom() {
   mapDiv.classList.add('content__response_car-map');
   mapDiv.id = ('map');
   document.getElementsByClassName('content__wrapper')[0].appendChild(mapDiv)
+
+
+}
+
+function addProperties(distance, time){
+
+  let element = document.getElementById('map-properties');
+  element.append(distance/1000);
+  element.append(time/3600);
 }
 
 function calculateAndDisplayRoute() {
@@ -71,8 +91,8 @@ let directionsResult;
     center: {lat: 50.27, lng: 30.31}
   });
 
-  var totalDistance = 0;
-  var totalDuration = 0;
+  let totalDistance = 0;
+  let totalDuration = 0;
   
   let legs;
 
