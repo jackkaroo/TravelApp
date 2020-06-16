@@ -12,7 +12,7 @@ router.post('/', function (req, res, next) {
             return res.redirect('/');
         } else {
             db.getUser(decoded.login).then(usr => {
-                res.status(200).json({login: usr.login, favourites: usr.favourites});
+                res.status(200).json({login: usr.login, favoritewaysidarray: usr.favourites});
             })
         }
     });
@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
         if (err) {
             return res.status(401).redirect('/');
         } else {
-            db.addFavourite(decoded.login, req.headers.favid).then(() => {
+            db.addFavourite(decoded.login, req.headers.favsid).then(() => {
                 res.status(200).send("ok");
             })
         }
