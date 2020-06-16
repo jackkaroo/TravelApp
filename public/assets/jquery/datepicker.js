@@ -45,7 +45,7 @@
             multipleDatesSeparator: ',',
             range: false,
 
-            todayButton: true,
+            todayButton: false,
             clearButton: true,
 
             showEvent: 'focus',

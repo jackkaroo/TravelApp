@@ -7,15 +7,23 @@
     let xhr = new XMLHttpRequest();
   
     xhr.addEventListener("readystatechange", function () {
+      if(xhr.status === 503) {
+        alert('connection error')
+      }
       if (this.readyState === this.DONE) {
         let response = JSON.parse(this.responseText);
+        if(response.errors) {
+          console.log(response.errors[0]);
+          addResponseTitleToDom('<h3 class="content__response_flight_title">Please enter valid data</h3>')
+          return;
+        }
+
         flightPoll(response);
-        //createFlights(response,flightFrom.placeName,flightTo.placeName)
       }
     });
-  
-    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?dd2=2020-09-15&currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
-    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?dd2=${flightTo.date}&currency=UAH&ta=1&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
+    console.log(flightFrom.adults)
+    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
+    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=${flightFrom.adults}&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
   
     xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", apiKey);
@@ -37,7 +45,11 @@
         }
     });
     
-    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/poll?currency=UAH&n=15&ns=NON_STOP%252CONE_STOP&so=PRICE&o=0&sid=${response.search_params.sid}`);
+    if(document.getElementById('direct_flight').checked)
+      xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/poll?currency=UAH&n=15&ns=NON_STOP&so=PRICE&o=0&sid=${response.search_params.sid}`);
+    else
+      xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/poll?currency=UAH&n=15&ns=NON_STOP%252C%20ONE_STOP&so=PRICE&o=0&sid=${response.search_params.sid}`);
+
     xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", apiKey);
     
@@ -67,12 +79,12 @@
   
   function createFlightsOption(response) {
     let itineraries = response.itineraries;
-    if(!itineraries) return 0;
+    if(!itineraries) {
+      addResponseTitleToDom('<h3 class="content__response_flight_title">Flights not found</h3>');
+      return 0;
+    }
 
-    let wrapperFirst = document.createElement('div');
-    wrapperFirst.classList.add('content__response_flight_items--wrapper-first')
-    wrapperFirst.setAttribute('data-aos','zoom-in');
-    document.getElementsByClassName('content__response_flight_items')[0].appendChild(wrapperFirst);
+    let wrapperFirst = addResponseTitleToDom('<h3 class="content__response_flight_title">best options</h3>')
 
     if (itineraries.length>3) addFlightsToDom(0, 3, wrapperFirst, response);
     else addFlightsToDom(0, itineraries.length, wrapperFirst, response);
@@ -81,6 +93,8 @@
     buttonShow.classList.add('button-text');
     buttonShow.innerHTML = "show all";
     document.getElementsByClassName('content__response_flight_items')[0].appendChild(buttonShow)
+    
+   
     buttonShow.addEventListener('click', function() {
       buttonShow.innerHTML = "hide";
       if(document.getElementsByClassName('content__response_flight_items--wrapper-second').length) {
@@ -113,7 +127,7 @@
       
       let obj = itineraries[i];
 
-      if(obj.f[0].l.length<2) {
+      // if(obj.f[0].l.length<2) {
       
         let originPlace = obj.f[0].l[0].da; //id
         let destinationPlace = obj.f[0].l[0].aa;
@@ -160,7 +174,7 @@
         })
         optionButton.insertAdjacentHTML('beforeend', `<button class="button">BUY</button>`);
         optionWrapper.appendChild(optionButton);
-      }
+     // }
     }
   }
   
@@ -206,58 +220,23 @@
     return map;
   }
 
-
-
-
-
-  /*function createFlightsd(response,placeNameFrom,placeNameTo){
-    console.log(response)
-    let mapCarriers = getCarriersMapId(response);
-    let mapPlaces = getPlacesMapId(response);
-   
-    let responseWrapper =  document.createElement('div');
-    responseWrapper.classList.add('content__response')
-    document.getElementsByClassName('content__wrapper')[0].appendChild(responseWrapper)
-  
-    let responseTitle = document.createElement('div');
-    responseTitle.classList.add('content__response-title');
-    responseTitle.insertAdjacentHTML('afterbegin',`<h2>${placeNameFrom}Kyiv --- ${placeNameTo}Warshaw</h2>`)
-    responseWrapper.appendChild(responseTitle)
-  
-    let responseQuotesWrapper = document.createElement('div');
-    responseQuotesWrapper.classList.add('content__response_quotes-wrapper');
-    responseWrapper.appendChild(responseQuotesWrapper)
-  
-    for(let i=0;i<response.Quotes.length;i++){
-      let responseQuotesItem = document.createElement('div');
-      responseQuotesItem.classList.add('content__response_quotes-item');
-      responseQuotesItem.insertAdjacentHTML('afterbegin',`${i+1}) DepartureDate: ${getDate(response.Quotes[i].OutboundLeg.DepartureDate)}, MinPrice: ${response.Quotes[i].MinPrice}, Carrier: ${mapCarriers.get(response.Quotes[i].OutboundLeg.CarrierIds[0])}, Place: from ${mapPlaces.get(response.Quotes[i].OutboundLeg.OriginId)} to ${mapPlaces.get(response.Quotes[i].OutboundLeg.DestinationId)}`)
-      responseQuotesWrapper.appendChild(responseQuotesItem)
+  function addResponseTitleToDom(text) {
+    if(document.getElementsByClassName('content__response_flight_items--wrapper-first')[0]) {
+      document.getElementsByClassName('content__response_flight_items')[0].removeChild(document.getElementsByClassName('content__response_flight_items--wrapper-first')[0])
+      // if(document.getElementsByClassName('button-text')[0]) {
+      //   document.getElementsByClassName('content__response_flight_items')[0].removeChild(document.getElementsByClassName('button-text')[1])
+      // }
     }
+    if(document.getElementsByClassName('content__response_flight_items--wrapper-second')[0]) {
+      document.getElementsByClassName('content__response_flight_items')[0].removeChild(document.getElementsByClassName('content__response_flight_items--wrapper-second')[0]);
+    }
+    
+    let wrapperFirst = document.createElement('div');
+    wrapperFirst.classList.add('content__response_flight_items--wrapper-first')
+    wrapperFirst.setAttribute('data-aos','zoom-in');
+    wrapperFirst.insertAdjacentHTML('afterbegin', 
+    `${text}`)
+    document.getElementsByClassName('content__response_flight_items')[0].appendChild(wrapperFirst);
+    
+    return wrapperFirst
   }
-  
-  function getCarriersMapId(response){
-    let map = new Map();
-    response.Carriers.forEach(element => {
-      map.set(element.CarrierId,element.Name)
-    })
-    return map;
-  }
-  
-  function getPlacesMapId(response){
-    let map = new Map();
-    response.Places.forEach(element => {
-      map.set(element.PlaceId,element.Name)
-    })
-    return map;
-  }
-  
-  function getDate(baseDate){
-    let tempDate = baseDate.substring(0,10)
-    let year = tempDate.substring(0,4);
-    let month = tempDate.substring(5,7);
-    let date = tempDate.substring(8,10);
-    let newDate= `${date}.${month}.${year}`
-  
-    return newDate;
-  }*/

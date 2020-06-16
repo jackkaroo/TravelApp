@@ -1,16 +1,6 @@
-let $start = $('#date_picker_start'),
-	$end = $('#date_picker_end');
+let $start = $('#date_picker_start')
 	$start.datepicker({
 		language: 'en',
-		onSelect: function (fd, date) {
-			$end.data('datepicker')
-				.update('minDate', date)
-		}
+		startDate: new Date()
 	})
-	$end.datepicker({
-		language: 'en',
-		onSelect: function (fd, date) {
-			$start.data('datepicker')
-				.update('maxDate', date)
-		}
-	})
+	

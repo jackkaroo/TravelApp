@@ -1,31 +1,34 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-const logger = require('morgan');
-const indexRouter = require('./routes/index');
-const loginRouter = require('./routes/login');
-const regRouter = require('./routes/reg');
-const logoutRouter = require('./routes/logout');
-const myRouter = require('./routes/my');
+var mongoose = require("mongoose");
+const bodyParser = require('body-parser');
+var config = require('./config/config.json');
+const cookieParser = require('cookie-parser');
 
 const app = express();
+
+// cookie parser
+app.use(cookieParser());
+
+// express body parser json
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+// express json
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+// static 
+app.use(express.static(__dirname + '/public'));
 
-
-app.use(logger('dev'));
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/reg', regRouter);
-app.use('/login', loginRouter);
-app.use('/logout', logoutRouter);
-app.use('/my', myRouter);
+//routes
+app.use('/', require('./routes/index.route'));
+app.use('/auth', require('./routes/auth.route'));
+app.use('/user', require('./routes/user.route'));
 
 
 //error handler
@@ -44,4 +47,35 @@ app.use(function (err, req, res, next) {
     //res.render('error');
 });
 
-module.exports = app;
+async function start() {
+    try {
+        await mongoose.connect(
+            config.db.mongoUrl, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true
+        },
+            ()=> console.log("Connected to mongo on port " + 3000)
+        );
+        app.listen(3000);
+    }catch(e){
+        console.log('Server error', e.message);
+        process.exit(1);
+    }
+}
+
+start();
+
+
+// mongoose.connect(config.db.mongoUrl, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//     useCreateIndex: true
+// }, function (err, client) {
+//     if (err) {
+//         console.log(err);
+//     }
+//     console.log('Successfully connected to database');
+// });
+
+// module.exports = app;

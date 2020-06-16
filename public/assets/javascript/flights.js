@@ -1,4 +1,4 @@
-const apiKey = 'be557a4761msh859fb1ff66181e9p123d2ajsn9940bf7444e0';
+const apiKey = '14007f756cmsha513cd718cddc77p1a562ajsn089728438c48';
 
 
 const airportFromInput = document.getElementsByClassName('content__choose_plane_dest-from')[0];
@@ -17,6 +17,9 @@ function getAirports(list, value){
   var xhr = new XMLHttpRequest();
 
   xhr.addEventListener("readystatechange", function () {
+    if(xhr.status === 503) {
+      alert('connection error')
+    }
     if (this.readyState === this.DONE) {
       let response = JSON.parse(this.responseText);
       /*console.log(response);*/
@@ -57,8 +60,6 @@ function checkOptionUnic(element){
   return 1;
 }
 
-
-
 /**ADDING EVENT LISTENERS ON BUTTON SEARCH FLIGHTS*/
 function openFlightSearchWindow() {
     updateSearchFlightDom();
@@ -67,16 +68,8 @@ function openFlightSearchWindow() {
   }
   
   function updateSearchFlightDom(){
-    /*document.getElementsByClassName('content__choose')[0].style.display = "flex";
-    document.getElementsByClassName('content__choose_plane')[0].style.display = "none";
-    document.getElementsByClassName('content__choose_car')[0].style.display = "none";
-    document.getElementsByClassName('content-title')[0].style.display = "none";
-    document.getElementsByClassName('content-subtitle')[0].style.display = "none";
-    document.getElementsByClassName('content__transport_btns')[0].style.display="none";*/
-
     document.getElementsByClassName('content__response')[0].style.display = "block";
     document.getElementsByClassName('content__response_flight')[0].style.display = "block";
-
   }
    
   function getInfoAirportFrom() {
@@ -87,7 +80,8 @@ function openFlightSearchWindow() {
       if (option[i].value===airportFromInput.value) {
         airportFrom.id = option[i].getAttribute('data-id');
         airportFrom.placeName = option[i].getAttribute('data-city');
-        airportFrom.date = document.getElementById('date_picker_start').value;
+        airportFrom.date = getValidDate(document.getElementById('date_picker_start').value);
+        airportFrom.adults = document.getElementsByClassName('content__choose_plane-person')[0].value;
       }
     }
   
@@ -102,11 +96,19 @@ function openFlightSearchWindow() {
       if (option[i].value===airportToInput.value) {
         airportTo.id = option[i].getAttribute('data-id');
         airportTo.placeName = option[i].getAttribute('data-city');
-        airportTo.date = document.getElementById('date_picker_end').value;
       }
     }
   
     return airportTo;
   }
 
+  function getValidDate(baseDate){
+    let tempDate = baseDate.substring(0,10)
+    let date = tempDate.substring(0,2);
+    let month = tempDate.substring(3,5);
+    let year = tempDate.substring(6,10);
+    let newDate= `${year}-${month}-${date}`
+  
+    return newDate;
+  }
  
