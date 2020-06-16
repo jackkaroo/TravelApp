@@ -1,0 +1,13 @@
+{
+  "server": {
+    "port": "3000"
+  },
+  "db": {
+    "mongoUrl": "mongodb+srv://user:qwerty123@cluster0-mgmwz.mongodb.net/travelapp?retryWrites=true&w=majority",
+    "collection": "users"
+  },
+  "crypto": {
+    "salt": 10,
+    "key": "secret"
+  }
+}

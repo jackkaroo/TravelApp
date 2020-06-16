@@ -1,18 +1,26 @@
 {
   "name": "travelapp",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.0.0",
+  "private": true,
   "scripts": {
-    "compile:sass": "sass assets/style/style2.scss assets/style/style2.css"
-    
+    "start": "node ./bin/www"
   },
-  "author": "",
-  "license": "ISC",
   "dependencies": {
-    "jquery": "^3.5.1",
-    "jquery-datetimepicker": "^2.5.21",
-    "sass": "^1.26.5",
-    "unirest": "^0.6.0"
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "~1.4.4",
+    "cookie-session": "^1.4.0",
+    "debug": "~2.6.9",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "mongoose": "^5.9.18",
+    "morgan": "~1.9.1",
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "pug": "^3.0.0"
+  },
+  "devDependencies": {
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.5.1"
   }
 }
