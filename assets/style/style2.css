@@ -203,12 +203,10 @@ abbr {
   max-width: 180px;
   margin-right: 30px;
 }
-.content__choose_car_item:last-of-type {
-  margin-right: 0;
-}
 .content__choose_car input {
   width: 180px;
   margin: 0;
+  margin-right: 30px;
   font-weight: 300;
   text-transform: uppercase;
 }
@@ -257,6 +255,9 @@ abbr {
 .content__response {
   display: none;
   padding-top: 70px;
+}
+.content__response_car {
+  display: none;
 }
 .content__response_car #map-properties {
   margin: 0 auto;
