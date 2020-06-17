@@ -2,6 +2,8 @@ let isAuth = getCookie('authCookie');
 console.log(isAuth)
 
 if(isAuth) {
+  //document.getElementsByClassName('header__nav')[0].removeChild(document.getElementsByClassName('header__nav-login')[0]);
+
   let btnLogOut = document.createElement('a');
   btnLogOut.classList.add('header__nav-logout');
   btnLogOut.classList.add('button-text');
@@ -26,6 +28,13 @@ else if(!isAuth) {
     document.getElementsByClassName('header__nav')[0].appendChild(document.getElementsByClassName('header__nav-logout')[0]);
     document.getElementsByClassName('header__nav')[0].appendChild(document.getElementsByClassName('header__nav-cab')[0]);
   }
+
+  let btnLogIn = document.createElement('a');
+  btnLogIn.classList.add('header__nav-cab');
+  btnLogIn.classList.add('button-text');
+  btnLogIn.innerHTML =  `Log In`;
+  btnLogIn.href = '/auth/login-page';
+  document.getElementsByClassName('header__nav')[0].appendChild(btnLogIn);
 }
 
 function getCookie(name) {

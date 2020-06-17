@@ -29,7 +29,7 @@ app.use(express.static(__dirname + '/public'));
 app.use('/', require('./routes/index.route'));
 app.use('/auth', require('./routes/auth.route'));
 app.use('/user', require('./routes/user.route'));
-
+app.use('/bookmark', require('./routes/bookmark.route'));
 
 //error handler
 app.use(function (err, req, res, next) {

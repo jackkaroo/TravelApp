@@ -1,17 +1,17 @@
 const mongoose = require('mongoose');
 
 
-const bookmarkSchema = mongoose.Schema(
+const BookmarkModelSchema = mongoose.Schema(
   {
     user__id: {
       type: String,
       required: true
     },
-    seed: {
+    sid: {
       type: String,
       required: true
     }
 });
 
 
-module.exports = mongoose.model('Bookmark', bookmarkSchema);
+module.exports = mongoose.model('BookmarkModel', BookmarkModelSchema);

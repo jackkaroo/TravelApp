@@ -22,8 +22,8 @@
       }
     });
     console.log(flightFrom.adults)
-    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
-    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=${flightFrom.adults}&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
+    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
+    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=${flightFrom.adults}&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
   
     xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", apiKey);
@@ -170,6 +170,14 @@
         /**<!--<div class="content__response_flight_item_ticket--carrier-plane">${carriersMap.get(carrierPlaneId)[0]}</div>
             <div class="content__response_flight_item_ticket--carrier-company">${carrierCompany}</div>--> */
 
+        let favoriteButton = document.createElement('div');
+        favoriteButton.classList.add('content__response_flight_item_button')
+        favoriteButton.addEventListener('click', function () {
+          addSidToFavorite(response.search_params.sid);
+        })
+        favoriteButton.insertAdjacentHTML('beforeend', `<button class="button">♥</button>`);
+        optionWrapper.appendChild(favoriteButton);
+
         let optionButton = document.createElement('div');
         optionButton.classList.add('content__response_flight_item_button')
         optionButton.addEventListener('click', function () {
@@ -242,4 +250,10 @@
     document.getElementsByClassName('content__response_flight_items')[0].appendChild(wrapperFirst);
     
     return wrapperFirst
+  }
+
+  function addSidToFavorite(sid) {
+    if(isAuth) console.log(sid)
+    else console.log('user not authorized')
+    
   }

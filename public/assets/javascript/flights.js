@@ -1,5 +1,5 @@
-const apiKey = '14007f756cmsha513cd718cddc77p1a562ajsn089728438c48';
-
+//const apiKey = '14007f756cmsha513cd718cddc77p1a562ajsn089728438c48';
+const apiKey = '5162173576msh4d8a143b4f1bd90p1eeeb1jsncfb9c791e740';
 
 const airportFromInput = document.getElementsByClassName('content__choose_plane_dest-from')[0];
 airportFromInput.addEventListener('keypress', function(){
