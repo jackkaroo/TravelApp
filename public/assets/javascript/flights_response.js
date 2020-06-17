@@ -14,7 +14,7 @@
         let response = JSON.parse(this.responseText);
         if(response.errors) {
           console.log(response.errors[0]);
-          addResponseTitleToDom('<h3 class="content__response_flight_title">Please enter valid data</h3>')
+          addResponseTitleToDom('<h3 class="content__response_flight_title">No flights found</h3>')
           return;
         }
 
@@ -22,8 +22,8 @@
       }
     });
     console.log(flightFrom.adults)
-    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
-    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=${flightFrom.adults}&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
+    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
+    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=${flightFrom.adults}&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
   
     xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", apiKey);
@@ -89,10 +89,12 @@
     if (itineraries.length>3) addFlightsToDom(0, 3, wrapperFirst, response);
     else addFlightsToDom(0, itineraries.length, wrapperFirst, response);
     
+    if(wrapperFirst) {
     let buttonShow = document.createElement('a');
     buttonShow.classList.add('button-text');
     buttonShow.innerHTML = "show all";
-    document.getElementsByClassName('content__response_flight_items')[0].appendChild(buttonShow)
+    wrapperFirst.appendChild(buttonShow)
+    
     
    
     buttonShow.addEventListener('click', function() {
@@ -109,6 +111,7 @@
         addFlightsToDom(3,itineraries.length,wrapperSecond,response );
     }
     })
+  }
   }
 
   function addFlightsToDom(min,max,wrapper,response) {

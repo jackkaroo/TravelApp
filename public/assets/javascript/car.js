@@ -119,7 +119,7 @@ function addResponseCarError() {
 
   let carDetailsWrapper = document.createElement('div');
   carDetailsWrapper.classList.add('content__response_car_details-wrapper');
-  carDetailsWrapper.insertAdjacentHTML('beforeend',`Directions request returned no results.`);
+  carDetailsWrapper.insertAdjacentHTML('beforeend',`Directions request returned no results`);
   document.getElementsByClassName('content__response_car-wrapper')[0].appendChild(carDetailsWrapper)
 
 }

@@ -113,6 +113,11 @@ abbr {
   line-height: 30px;
   color: #FFFFFF;
 }
+.header__nav-login {
+  width: 180px;
+  text-align: center;
+  padding: 10px 0;
+}
 
 .hero {
   position: relative;

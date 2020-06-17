@@ -12,8 +12,8 @@ header.header
       .header__logo
         | OurName
       nav.header__nav
-        //- button.header__nav-login.btn(type='reset' onclick='openLoginPage()') Log in 
-        a(href='/auth/login-page') Log in
+        a.header__nav-login.button-text(href='/auth/login-page', onclick='openLoginPage()') Log in 
+        //a(href='/auth/login-page') Log in
 section.hero(data-aos='zoom-in')
   .container
     .hero-wrapper

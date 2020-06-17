@@ -1,3 +1,39 @@
+let isAuth = getCookie('authCookie');
+console.log(isAuth)
+
+if(isAuth) {
+  let btnLogOut = document.createElement('a');
+  btnLogOut.classList.add('header__nav-logout');
+  btnLogOut.classList.add('button-text');
+  btnLogOut.innerHTML = 'Log out';
+  btnLogOut.addEventListener('click', function() {
+    document.cookie = "authCookie=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    window.location.reload(false);
+  })
+  document.getElementsByClassName('header__nav')[0].appendChild(btnLogOut);
+
+  let btnCab = document.createElement('a');
+  btnCab.classList.add('header__nav-cab');
+  btnCab.classList.add('button-text');
+  btnCab.innerHTML =  `Profile Page`;
+  btnCab.href = '/user';
+  document.getElementsByClassName('header__nav')[0].appendChild(btnCab);
+}
+
+else if(!isAuth) {
+  console.log('no')
+  if(document.getElementsByClassName('header__nav-logout')[0]) {
+    document.getElementsByClassName('header__nav')[0].appendChild(document.getElementsByClassName('header__nav-logout')[0]);
+    document.getElementsByClassName('header__nav')[0].appendChild(document.getElementsByClassName('header__nav-cab')[0]);
+  }
+}
+
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+}
+
 /**ADDING EVENT LISTENERS ON BUTTONS PLANE AND CAR*/
 function openFlightChooseWindow() {
   document.getElementsByClassName('content__choose_car')[0].style.display = "none";
