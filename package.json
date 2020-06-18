@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "compile:sass": "sass public/assets/style/style2.scss public/assets/style/style2.css",
-    "start": "node app.js"
+    "start": "set NODE_ENV=development&& node app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
