@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "compile:sass": "sass public/assets/style/style2.scss public/assets/style/style2.css",
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -20,9 +20,7 @@
     "nodemon": "^2.0.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
-    "pug": "^3.0.0"
-  },
-  "devDependencies": {
+    "pug": "^3.0.0",
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1"
   },
