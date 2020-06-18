@@ -283,9 +283,16 @@
         }
 
       ).then((res) => {
-        console.log('ok')
+        res.json().then((data) => showError(data.error))
+
 
       }).catch(function () {
         console.log('Error occurred, please try again')
       })
+  }
+
+  function showError(error) {
+    if(error) {
+      alert('Route is already added')
+    }
   }

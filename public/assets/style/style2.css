@@ -330,8 +330,8 @@ abbr {
   text-transform: uppercase;
 }
 .content__response_flight_item_button-fav:hover {
-  text-decoration: none;
   color: inherit;
+  background: rgba(180, 149, 101, 0.1);
 }
 .content__response_flight_item_ticket {
   border-top: 1px solid rgba(255, 255, 255, 0.7);

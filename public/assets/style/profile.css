@@ -17,3 +17,14 @@
 .profile_title {
   font-size:40px;
 }
+
+.profile__favorite {
+  margin: 70px 0;
+}
+
+.profile__favorite_title {
+  text-align: center;
+  margin-bottom:30px;
+  color:#B49565;
+  font-size: 30px;
+}
