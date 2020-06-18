@@ -57,7 +57,7 @@ async function start() {
         },
             ()=> console.log("Connected to mongo on port " + 3000)
         );
-        app.listen(3000);
+        app.listen(process.env.PORT || 3000);
     }catch(e){
         console.log('Server error', e.message);
         process.exit(1);
