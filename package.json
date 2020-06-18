@@ -25,5 +25,10 @@
   "devDependencies": {
     "joi": "^14.3.1",
     "jsonwebtoken": "^8.5.1"
+  },
+  "main": "app.js",
+  "engines": {
+    "node": "0.10.26",
+    "npm": "1.4.3"
   }
 }
