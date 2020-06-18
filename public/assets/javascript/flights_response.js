@@ -22,8 +22,8 @@
       }
     });
     console.log(flightFrom.adults)
-    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
-    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=${flightFrom.adults}&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
+    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
+    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=${flightFrom.adults}&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
   
     xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", apiKey);
@@ -95,8 +95,6 @@
     buttonShow.innerHTML = "show all";
     wrapperFirst.appendChild(buttonShow)
     
-    
-   
     buttonShow.addEventListener('click', function() {
       buttonShow.innerHTML = "hide";
       if(document.getElementsByClassName('content__response_flight_items--wrapper-second').length) {
@@ -118,7 +116,7 @@
     let itineraries = response.itineraries;
     if(!itineraries) return 0;
     let airportMap = getResponseFlightAirportMap(response);
-    let planeMap = getResponseFlightPlaneMap(response);
+    //let planeMap = getResponseFlightPlaneMap(response);
     let carriersMap = getResponseFlightCarriersMap(response);
     $('input[type="checkbox"]').click(function(){
       if($(this).is(":checked")){
@@ -170,13 +168,26 @@
         /**<!--<div class="content__response_flight_item_ticket--carrier-plane">${carriersMap.get(carrierPlaneId)[0]}</div>
             <div class="content__response_flight_item_ticket--carrier-company">${carrierCompany}</div>--> */
 
-        let favoriteButton = document.createElement('div');
-        favoriteButton.classList.add('content__response_flight_item_button')
+        let optionButtons = document.createElement('div');
+        optionButtons.classList.add('content__response_flight_item_buttons')
+        optionWrapper.appendChild(optionButtons);
+
+        let favoriteButton = document.createElement('a');
+        favoriteButton.classList.add('content__response_flight_item_button-fav')
+        favoriteButton.innerHTML = '♥';
         favoriteButton.addEventListener('click', function () {
-          addSidToFavorite(response.search_params.sid);
+          if(isAuth) addSidToFavorite(response.search_params.sid);
+     
+          else {
+            favoriteButton.innerHTML ='You need to log in'
+            favoriteButton.style.border = 'none'
+            favoriteButton.addEventListener('click', function () {
+              favoriteButton.href = '/auth/login-page'
+            })
+          }
         })
-        favoriteButton.insertAdjacentHTML('beforeend', `<button class="button">♥</button>`);
-        optionWrapper.appendChild(favoriteButton);
+        
+        optionButtons.appendChild(favoriteButton);
 
         let optionButton = document.createElement('div');
         optionButton.classList.add('content__response_flight_item_button')
@@ -184,7 +195,7 @@
           getBookData(response, obj.l[0].id);
         })
         optionButton.insertAdjacentHTML('beforeend', `<button class="button">BUY</button>`);
-        optionWrapper.appendChild(optionButton);
+        optionButtons.appendChild(optionButton);
      // }
     }
   }
@@ -252,8 +263,29 @@
     return wrapperFirst
   }
 
-  function addSidToFavorite(sid) {
-    if(isAuth) console.log(sid)
-    else console.log('user not authorized')
-    
+  function addSidToFavorite(sidValue) {
+    console.log(sidValue)
+
+    let obj = {
+      user__id: isAuth,
+      sid: sidValue
+    }
+
+    console.log(JSON.stringify(obj))
+
+    fetch('/bookmark',
+        {
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(obj)
+        }
+
+      ).then((res) => {
+        console.log('ok')
+
+      }).catch(function () {
+        console.log('Error occurred, please try again')
+      })
   }

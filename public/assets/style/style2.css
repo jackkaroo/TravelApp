@@ -105,18 +105,18 @@ abbr {
   align-items: center;
   padding: 33px 0;
 }
-.header__logo {
-  font-family: "Cormorant", serif;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 25px;
-  line-height: 30px;
-  color: #FFFFFF;
+.header__logo img {
+  max-width: 200px;
 }
-.header__nav-login {
-  width: 180px;
-  text-align: center;
-  padding: 10px 0;
+.header__nav-cab {
+  margin-left: 20px;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-decoration: none;
+}
+.header__nav-cab:hover {
+  outline: none;
+  background: rgba(180, 149, 101, 0.1);
 }
 
 .hero {
@@ -312,6 +312,27 @@ abbr {
 .content__response_flight_item {
   padding-top: 35px;
 }
+.content__response_flight_item_buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+.content__response_flight_item_button-fav {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-right: 20px;
+  border: 1px solid #B49565;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+}
+.content__response_flight_item_button-fav:hover {
+  text-decoration: none;
+  color: inherit;
+}
 .content__response_flight_item_ticket {
   border-top: 1px solid rgba(255, 255, 255, 0.7);
   border-bottom: 1px solid rgba(255, 255, 255, 0.7);
@@ -368,10 +389,6 @@ abbr {
   font-weight: 300;
   font-size: 16px;
   margin-right: 70px;
-}
-.content__response_flight_item_button {
-  display: flex;
-  justify-content: flex-end;
 }
 
 .statistic {

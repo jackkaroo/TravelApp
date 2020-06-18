@@ -21,7 +21,7 @@ async function registerHandler(){
     if (response.ok){
       window.location.href = '/'
     }else {
-      await response.json().then(data => console.log(data.error_type))
+      await response.json().then(data => showValidationError('User already exist'))
     }
 }
 
@@ -41,6 +41,11 @@ async function loginHandler(){
     if (response.ok) {
       window.location.href = '/'
     } else {
-      await response.json().then(data => console.log(data.error_type))
+      await response.json().then(data => showValidationError(`Invalid ${data.error_type}`))
     }
+}
+
+function showValidationError(error) {
+  document.getElementById('wrong-auth').style.display = 'block'
+  document.getElementById('wrong-auth').innerHTML =  error;
 }

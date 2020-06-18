@@ -16,7 +16,7 @@ if(isAuth) {
 
   let btnCab = document.createElement('a');
   btnCab.classList.add('header__nav-cab');
-  btnCab.classList.add('button-text');
+  btnCab.classList.add('button');
   btnCab.innerHTML =  `Profile Page`;
   btnCab.href = '/user';
   document.getElementsByClassName('header__nav')[0].appendChild(btnCab);
@@ -30,7 +30,7 @@ else if(!isAuth) {
   }
 
   let btnLogIn = document.createElement('a');
-  btnLogIn.classList.add('header__nav-cab');
+  btnLogIn.classList.add('header__nav-login');
   btnLogIn.classList.add('button-text');
   btnLogIn.innerHTML =  `Log In`;
   btnLogIn.href = '/auth/login-page';

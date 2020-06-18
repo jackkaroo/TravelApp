@@ -1,17 +1,28 @@
-.wrapper(style="background:rgba(44, 67, 80, 0.94);height:100vh;")
-  .card-content.white-text
-    .input-form
-      label.email Email
-      
-      .input-field
-        input#email.form-control(placeholder='Введіть email' type='email' name='email' aria-label='Small' required='')
-      label.password &Pcy;&acy;&rcy;&ocy;&lcy;&softcy;
-      input#password.form-control(placeholder='Введіть пароль' type='password' name='password' aria-label='Small' required='')
-    span#wrong-auth
-  .card-action
-    button.btn.btn-primary.btn-sm(onclick='loginHandler();')
-      | &Ucy;&vcy;&iukcy;&jcy;&tcy;&icy;
-    button.btn.btn-primary.btn-sm(onclick='registerHandler();')
-      | &Rcy;&iecy;&jukcy;&scy;&tcy;&rcy;&acy;&tscy;&iukcy;&yacy;
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    //- link(href='/assets/style/style2.css', rel='stylesheet', type='text/css')
+    link(href='/assets/style/login.css', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='https://unpkg.com/aos@next/dist/aos.css')
+    link(href='https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Roboto:wght@300;400&display=swap', rel='stylesheet')
+    title Document
+  body
+    .login-wrapper
+      h1.login_title Log in
+      .login_content
+        .login_input-form
+          .input-field
+            input#email.form-control(placeholder='Enter email', type='email', name='email', required='', spellcheck='false')
+          .input-field
+            input#password.form-control(placeholder='Enter password', type='password', name='password', required='')
+          #wrong-auth
+      .login_buttons
+        button.login_button(onclick='loginHandler();') SIGN IN
+        button(onclick='registerHandler();') REGESTRATION
 
-script(src='/assets/javascript/login.js')
+    script(src='/assets/javascript/login.js')
+    link(href='https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Roboto:wght@300;400&display=swap', rel='stylesheet')
+    title WorldRound | Login
+      

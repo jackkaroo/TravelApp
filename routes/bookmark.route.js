@@ -5,17 +5,20 @@ const BookmarkModel = require('../models/BookmarkModel');
 
 // get all boommarks by user id
 router.get('/:id', async function(req, res, next) {
-  const user = await UserModel.findOne({'_id': req.params.id});
-  if (!user) {
-    return res.status(400).json({error_type: 'user'});
-  }
-  const bookmarks = await BookmarkModel.find({'user__id': user._id})
+  const user_id = req.params.id;
+  console.log(user_id, 'dhaskjdskjakda')
+  // const user = await UserModel.findOne({'_id': user_id.toStri});
+  // if (!user) {
+  //   return res.status(400).json({error_type: 'user'});
+  // }
+  const bookmarks = await BookmarkModel.find({'user__id': user_id})
   res.json(bookmarks)
 });
 
 // add bookmark
 router.post('/', async function(req, res, next) {
   const {user__id, sid} = req.body;
+  console.log(req.body)
   const newBookmark = new BookmarkModel({ user__id, sid });
   await newBookmark.save()
   res.send('saved')
