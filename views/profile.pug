@@ -1,0 +1,29 @@
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    link(href='/assets/style/style2.css', rel='stylesheet', type='text/css')
+    link(href='/assets/style/profile.css', rel='stylesheet', type='text/css')
+    link(rel='stylesheet', href='https://unpkg.com/aos@next/dist/aos.css')
+    link(href='https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Roboto:wght@300;400&display=swap', rel='stylesheet')
+    title WorldRound | Profile
+  body
+    header.header
+      .container
+        .header__wrapper
+          .header__logo
+            img(src='assets/images/logo.png')
+          nav.header__nav
+            a.button(href="/") Main Page
+    section.profile
+      .container
+        .profile__wrapper
+          h1.profile_title Hi,  #{username}!
+          .profile__favorite
+            h2.profile__favorite_title Your favorite routes
+
+
+script(src='/assets/javascript/index.js')
+script(src='/assets/javascript/flights_response.js')
+script(src='/assets/javascript/profile.js')

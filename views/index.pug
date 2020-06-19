@@ -1,0 +1,121 @@
+doctype html
+head
+  meta(charset='UTF-8')
+  meta(name='viewport' content='width=device-width, initial-scale=1.0')
+  link(href='assets/style/style2.css' rel='stylesheet' type='text/css')
+  link(rel='stylesheet' href='https://unpkg.com/aos@next/dist/aos.css')
+  link(href='https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Roboto:wght@300;400&display=swap' rel='stylesheet')
+ 
+  title WorldRound
+header.header
+  .container
+    .header__wrapper
+      .header__logo
+        img(src='assets/images/logo.png')
+      nav.header__nav
+section.hero(data-aos='zoom-in')
+  .container
+    .hero-wrapper
+      .hero__info
+        h1.hero__info_title WORLD
+        h2.hero__info_subtitle ROUND
+        .hero__info_quote
+          .hero__info_quote-text &ldquo;Traveling &ndash; it leaves you speechless, then turns you into a storyteller.&rdquo; 
+          .hero__info_quote-author Ibn Battuta
+        .hero__info_button.button-wrapper
+          a.button-text(href='#create') create tour
+          img.button-img(src='/assets/images/arrow.svg')
+  img.hero__bg(src='assets/images/bg-island.png')
+section#create.content
+  .container
+    h3.content__title WE WILL HELP YOU FIND THE PERFECT HOLIDAY
+    .content__subtitle what do you travel by
+    .content__transport_btns
+      button.content__transport_btns-plane.btn(onclick='openFlightChooseWindow()') Plane
+      button.content__transport_btns-car.btn(onclick='openCarChooseWindow()') Car
+    .content__choose
+      // PLANE
+      .content__choose_plane
+        .content__choose_plane_items
+          .content__choose_plane_item
+            input.content__choose_plane_dest-from(type='text' list='destination-from' required='' spellcheck='false' placeholder='Origin')
+            datalist#destination-from
+          .content__choose_plane_item
+            input.content__choose_plane_dest-to(type='text' list='destination-to' required='' spellcheck='false' placeholder='Destination')
+            datalist#destination-to
+          .content__choose_plane_item
+            input.content__choose_plane-adults(type='number' required='' placeholder='Adults' min="0")(style="width:75px;")
+
+          .content__choose_plane_item
+            input.content__choose_plane-child(type='number' required='' placeholder='Child' min="0")(style="width:75px;")
+        .content__choose_plane_items
+          .content__choose_plane_item
+            input#date_picker_start.content__choose_plane_date-from(type='text' required='' spellcheck='false' placeholder='Departure' autocomplete='off')
+          .content__choose_plane_item.content__choose_plane_item-direct
+            // <input class="content__choose_plane_date-to" id="date_picker_end" type="text" spellcheck="false" placeholder="Return" autocomplete="off">
+            input#direct_flight.content__choose_plane_direct-radio(type='checkbox')
+            label.content__choose_plane_direct-label(for='direct_flight') Direct flights only
+          .content__choose_plane_item
+            button.content__choose_plane-btn(onclick='openFlightSearchWindow()') Search
+      // CAR
+      .content__choose_car
+        .content__choose_car_items
+          .content__choose_car_item
+            input.content__choose_car_dest-from(type='text' list='destination-from' required='' spellcheck='false' placeholder='Origin')
+          .content__choose_car_item
+            input.content__choose_car_dest-to(type='text' list='destination-to' required='' spellcheck='false' placeholder='Destination')
+          .content__choose_car_item
+            button.content__choose_car-btn(onclick='openMapSearchWindow()') Search
+    .content__response
+      .content__response_flight
+        .content__response_flight_items
+      .content__response_car
+section.statistic
+  .container
+    .statistic-wrapper
+      .statistic__items
+        .statistic__item
+          .statistic__item_title Happy Tourists
+          .statistic__item_numb 3000
+        .statistic__item
+          .statistic__item_title Countries
+          .statistic__item_numb 60
+        .statistic__item
+          .statistic__item_title Flights
+          .statistic__item_numb 15720
+        .statistic__item
+          .statistic__item_title Years of experience
+          .statistic__item_numb 2
+footer.contacts
+  .container
+    h3.contacts__title Contacts
+    .contacts__info
+      .contacts__info_text
+        .contacts__info_text-adress
+          | 01001
+          br
+          | Hryhoriy Skovoroda Street, 2, Kyiv
+        .contacts__info_text-phone
+          | tel: +38 (044) 278-13-57
+          | fax +38 (044) 278-74-54
+        .contacts__info_text-mail e-mail: info@praktyka.com
+      form.contacts__info_form
+        .contacts__info_form-title any questions?
+        input.contacts__info_form-name(placeholder='Name')
+        input.contacts__info_form-mail(placeholder='Email')
+        input.contacts__info_form-message(placeholder='Message')
+        .button-wrapper
+          a.button-text(href='') Send
+          img.button-img(src='/assets/images/arrow.svg')
+      img.contacts__info_img(src='/assets/images/map.png')
+script(src='https://unpkg.com/aos@next/dist/aos.js')
+script.
+  AOS.init();
+link(href='assets/style/datepicker.css' rel='stylesheet')
+script(src='assets/jquery/jquery.js')
+script(src='assets/jquery/datepicker.js')
+script(src='assets/javascript/index_jquery.js')
+script(src='assets/javascript/index.js')
+script(src='assets/javascript/flights.js')
+script(src='assets/javascript/flights_response.js')
+script(src='assets/javascript/car.js')

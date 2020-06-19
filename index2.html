@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="assets/style/style2.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
+  <title>Document</title>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header__wrapper">
+        <div class="header__logo" >
+          <img src="/assets/images/logo.png" >
+        </div>
+
+        <nav class="header__nav">
+          <button class="header__nav-login btn" onclick="openLoginPage()">Log in </button>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <section class="hero" data-aos="zoom-in">
+    <div class="container" >
+      <div class="hero-wrapper">
+      <div class="hero__info">
+        <h1 class="hero__info_title">WORLD</h1>
+        <h2 class="hero__info_subtitle">ROUND</h2>
+        <div class="hero__info_quote">
+          <div class="hero__info_quote-text">“Traveling – it leaves you speechless, then turns you into a storyteller.” </div>
+          <div class="hero__info_quote-author">Ibn Battuta</div>
+        </div>
+        <div class="hero__info_button button-wrapper">
+          <a href="#create" class="button-text">create tour</a>
+          <img src="/assets/images/arrow.svg" class="button-img">
+        </div>
+      </div> 
+      </div>
+    </div>  
+    <img class="hero__bg" src="assets/images/bg-island.png">
+  </section>
+
+  <section class="content" id="create">
+    <div class="container">
+      <h3 class="content__title">WE WILL HELP YOU FIND THE PERFECT HOLIDAY</h3>
+      <div class="content__subtitle">what do you travel by</div>
+      <div class="content__transport_btns">
+        <button class="content__transport_btns-plane btn" onclick="openFlightChooseWindow()">Plane</button>
+        <button class="content__transport_btns-car btn" onclick="openCarChooseWindow()">Car</button>
+      </div>
+
+      <div class="content__choose">
+        
+        <!--PLANE-->
+        <div class="content__choose_plane" >
+          <div class="content__choose_plane_items">
+            <div class="content__choose_plane_item">
+              <input type ="text" list="destination-from" class="content__choose_plane_dest-from" required spellcheck="false" placeholder="Origin">
+              <datalist id="destination-from"></datalist>
+            </div>
+            
+            <div class="content__choose_plane_item">
+              <input type ="text" list="destination-to" class="content__choose_plane_dest-to" required spellcheck="false" placeholder="Destination">
+              <datalist id="destination-to"></datalist>
+            </div>
+            
+            <div class="content__choose_plane_item">
+              <input type="number" class="content__choose_plane-person" required placeholder="Passengers">
+            </div>
+          </div>
+
+          <div class="content__choose_plane_items">
+            <div class="content__choose_plane_item">
+              <input class="content__choose_plane_date-from" id="date_picker_start"  type="text" required spellcheck="false" placeholder="Departure" autocomplete="off">
+        
+            </div>         
+            <div class="content__choose_plane_item content__choose_plane_item-direct">
+              
+              <!--<input class="content__choose_plane_date-to" id="date_picker_end" type="text" spellcheck="false" placeholder="Return" autocomplete="off">-->
+              <input type="checkbox" id="direct_flight" class="content__choose_plane_direct-radio">
+              <label for="direct_flight" class="content__choose_plane_direct-label">Direct flights only</label>
+            </div>        
+            <div class="content__choose_plane_item">
+              <button class="content__choose_plane-btn" onclick="openFlightSearchWindow()">Search</button>
+            </div>           
+          </div>
+        </div>
+      
+
+        <!--CAR-->
+        <div class="content__choose_car">
+
+          <div class="content__choose_car_items">
+            <div class="content__choose_car_item">
+              <input type ="text"  required class="content__choose_car_dest-from" spellcheck="false" placeholder="Origin">
+            </div>         
+            <div class="content__choose_car_item">
+              <input type ="text"  required class="content__choose_car_dest-to" spellcheck="false" placeholder="Destination">
+            </div>        
+            <div class="content__choose_car_item">
+              <button class="content__choose_car-btn" onclick="openMapSearchWindow()">Search</button>                          
+            </div>           
+          </div>
+        </div> 
+
+      </div>
+
+      <div class="content__response">
+        <div class="content__response_flight">
+          <div class="content__response_flight_items">
+          </div>
+        </div>
+
+        <div class="content__response_car">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="statistic">
+    <div class="container">
+      <div class="statistic-wrapper">
+        <div class="statistic__items">
+
+          <div class="statistic__item">
+            <div class="statistic__item_title">Happy Tourists</div>
+            <div class="statistic__item_numb">3000</div>
+          </div>
+          <div class="statistic__item">
+            <div class="statistic__item_title">Countries</div>
+            <div class="statistic__item_numb">60</div>
+          </div>
+          <div class="statistic__item">
+            <div class="statistic__item_title">Flights</div>
+            <div class="statistic__item_numb">15720</div>
+          </div>
+          <div class="statistic__item">
+            <div class="statistic__item_title">Years of experience</div>
+            <div class="statistic__item_numb">2</div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="contacts">
+    <div class="container">
+      <h3 class="contacts__title">Contacts</h3>
+      <div class="contacts__info">
+        <div class="contacts__info_text">
+          <div class="contacts__info_text-adress">01001<br>Hryhoriy Skovoroda Street, 2, Kyiv</div>
+          <div class="contacts__info_text-phone">tel: +38 (044) 278-13-57
+            fax +38 (044) 278-74-54</div>
+          <div class="contacts__info_text-mail">e-mail: info@praktyka.com</div>
+        </div>
+
+        <form class="contacts__info_form">
+          <div class="contacts__info_form-title">any questions?</div>
+          <input class="contacts__info_form-name" placeholder="Name">
+          <input class="contacts__info_form-mail" placeholder="Email">
+          <input class="contacts__info_form-message" placeholder="Message">
+          <div class="button-wrapper">
+            <a href="" class="button-text">Send</a>
+            <img src="/assets/images/arrow.svg" class="button-img">
+          </div>
+        </form>
+        <img src="/assets/images/map.png" class="contacts__info_img">
+      </div>      
+    </div>
+  </footer>
+</body>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>AOS.init();</script>
+
+<link href="assets/style/datepicker.css" rel="stylesheet">
+<script src="assets/jquery/jquery.js"></script>
+<script src="assets/jquery/datepicker.js"></script>
+
+
+<script src="assets/javascript/index_jquery.js"></script>
+<script src="assets/javascript/index.js"></script>
+
+<script src="assets/javascript/flights.js"></script>
+<script src="assets/javascript/flights_response.js"></script>
+
+<script src="assets/javascript/car.js"></script>
+
+</html>
