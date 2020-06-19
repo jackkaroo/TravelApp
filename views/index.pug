@@ -5,6 +5,7 @@ head
   link(href='assets/style/style2.css' rel='stylesheet' type='text/css')
   link(rel='stylesheet' href='https://unpkg.com/aos@next/dist/aos.css')
   link(href='https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Roboto:wght@300;400&display=swap' rel='stylesheet')
+ 
   title WorldRound
 header.header
   .container
@@ -43,7 +44,10 @@ section#create.content
             input.content__choose_plane_dest-to(type='text' list='destination-to' required='' spellcheck='false' placeholder='Destination')
             datalist#destination-to
           .content__choose_plane_item
-            input.content__choose_plane-person(type='number' required='' placeholder='Passengers')
+            input.content__choose_plane-adults(type='number' required='' placeholder='Adults' min="0")(style="width:75px;")
+
+          .content__choose_plane_item
+            input.content__choose_plane-child(type='number' required='' placeholder='Child' min="0")(style="width:75px;")
         .content__choose_plane_items
           .content__choose_plane_item
             input#date_picker_start.content__choose_plane_date-from(type='text' required='' spellcheck='false' placeholder='Departure' autocomplete='off')

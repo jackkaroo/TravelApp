@@ -18,15 +18,26 @@ router.get('/:id', async function(req, res, next) {
 // add bookmark
 router.post('/', async function(req, res, next) {
   const {user__id, sid} = req.body;
-  console.log(req.body)
-  const newBookmark = new BookmarkModel({ user__id, sid });
-  await newBookmark.save()
-  res.send('saved')
+
+  let validate = true;
+  const bookmarks = await BookmarkModel.find({'user__id': user__id})
+  console.log(bookmarks)
+  if(bookmarks) {
+    for(let i=0;i<bookmarks.length;i++) {
+      if(bookmarks[i].sid===sid) validate = false;
+    }
+  }
+  if(validate) {
+    const newBookmark = new BookmarkModel({ user__id, sid });
+    await newBookmark.save()
+    res.json({error: ''})
+  } else res.json({error: 'yas'})
 });
 
 // delete bookmark by bookmark id
 router.delete('/:id', async function(req, res, next) {
   await BookmarkModel.deleteOne({'_id': req.params.id});
+  res.json('saved')
 });
 
 module.exports = router;

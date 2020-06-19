@@ -1,5 +1,7 @@
-const apiKey = '14007f756cmsha513cd718cddc77p1a562ajsn089728438c48';
+
 //const apiKey = '5162173576msh4d8a143b4f1bd90p1eeeb1jsncfb9c791e740';
+//const apiKey = '824d22695cmshb4471de4c612457p122e52jsn3781e9030fbf';
+const apiKey = '45266a2716msh77748bd81cec01dp1d3795jsn903133b56017'
 
 const airportFromInput = document.getElementsByClassName('content__choose_plane_dest-from')[0];
 airportFromInput.addEventListener('keypress', function(){
@@ -81,7 +83,8 @@ function openFlightSearchWindow() {
         airportFrom.id = option[i].getAttribute('data-id');
         airportFrom.placeName = option[i].getAttribute('data-city');
         airportFrom.date = getValidDate(document.getElementById('date_picker_start').value);
-        airportFrom.adults = document.getElementsByClassName('content__choose_plane-person')[0].value;
+        airportFrom.adults = document.getElementsByClassName('content__choose_plane-adults')[0].value;
+        airportFrom.child = document.getElementsByClassName('content__choose_plane-child')[0].value;
       }
     }
   
@@ -107,7 +110,7 @@ function openFlightSearchWindow() {
     let date = tempDate.substring(0,2);
     let month = tempDate.substring(3,5);
     let year = tempDate.substring(6,10);
-    let newDate= `${year}-${month}-${date}`
+    let newDate= `${year}-${date}-${month}`
   
     return newDate;
   }
