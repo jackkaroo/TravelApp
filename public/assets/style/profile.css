@@ -28,3 +28,7 @@
   color:#B49565;
   font-size: 30px;
 }
+
+.delete {
+  float: right;
+}

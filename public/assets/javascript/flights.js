@@ -81,7 +81,8 @@ function openFlightSearchWindow() {
         airportFrom.id = option[i].getAttribute('data-id');
         airportFrom.placeName = option[i].getAttribute('data-city');
         airportFrom.date = getValidDate(document.getElementById('date_picker_start').value);
-        airportFrom.adults = document.getElementsByClassName('content__choose_plane-person')[0].value;
+        airportFrom.adults = document.getElementsByClassName('content__choose_plane-adults')[0].value;
+        airportFrom.child = document.getElementsByClassName('content__choose_plane-child')[0].value;
       }
     }
   

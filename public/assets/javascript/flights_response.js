@@ -21,9 +21,10 @@
         flightPoll(response);
       }
     });
-    console.log(flightFrom.adults)
-    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
-    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=${flightFrom.adults}&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
+    console.log('ad',flightFrom.adults)
+    console.log('chils',flightFrom.child)
+    //xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=1&c=0&d1=VIE&o1=LON&dd1=2020-09-12`);
+    xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/create-session?currency=UAH&ta=${flightFrom.adults}&ts=${flightFrom.child}&c=0&d1=${flightTo.id}&o1=${flightFrom.id}&dd1=${flightFrom.date}`);
   
     xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
     xhr.setRequestHeader("x-rapidapi-key", apiKey);
@@ -127,75 +128,85 @@
     for(let i=min;i<max;i++){
       
       let obj = itineraries[i];
-
-      // if(obj.f[0].l.length<2) {
+      let size = obj.f[0].l.length;
+      let destLocation = obj.f[0].l[size-1].aa;
       
-        let originPlace = obj.f[0].l[0].da; //id
-        let destinationPlace = obj.f[0].l[0].aa;
-        let originDate = obj.f[0].l[0].dd;
-        let destinationDate = obj.f[0].l[0].ad;
+      let originPlace = obj.f[0].l[0].da; //id
+      let destinationPlace = obj.f[0].l[size-1].aa
+      let originDate = obj.f[0].l[0].dd;
+      let destinationDate = obj.f[0].l[0].ad;
 
-        let carrierPlaneId = obj.f[0].l[0].e; //can be empty
-        let carrierAirCompanyId = obj.f[0].l[0].m; //find by id name and image
-        let carrierCompany = obj.l[0].s; //always cheap one
+      //let carrierPlaneId = obj.f[0].l[0].e; //can be empty
+      let carrierAirCompanyId = obj.f[0].l[0].m; //find by id name and image
+      //let carrierCompany = obj.l[0].s; //always cheap one
 
-        let price = obj.l[0].pr.p;
-        
-        let optionWrapper = document.createElement('div');
-        optionWrapper.classList.add('content__response_flight_item')
-        wrapper.appendChild(optionWrapper)
+      let price = obj.l[0].pr.p;
+      
+      let optionWrapper = document.createElement('div');
+      optionWrapper.classList.add('content__response_flight_item')
+      wrapper.appendChild(optionWrapper)
 
-        let optionTicket = document.createElement('div');
-        optionTicket.classList.add('content__response_flight_item_ticket')
-        optionTicket.insertAdjacentHTML('beforeend', 
-        `<div class="content__response_flight_item_ticket--wrapper">
-          <div class="content__response_flight_item_ticket--date">${getResponseFlightDate(originDate)}
-          </div>
-          <div class="content__response_flight_item_ticket--flight">
-            <div class="content__response_flight_item_ticket--flight-time">${getResponseFlightTime(originDate)}</div>
-            <div class="content__response_flight_item_ticket--flight-airport">${airportMap.get(originPlace)[0]} <abbr title="${airportMap.get(originPlace)[1]}">(${originPlace})</abbr> </div>
-          </div>
-          <div class="content__response_flight_item_ticket--flight content__response_flight_item_ticket--flight-1">
-            <div class="content__response_flight_item_ticket--flight-time">${getResponseFlightTime(destinationDate)}</div>
-            <div class="content__response_flight_item_ticket--flight-airport">${airportMap.get(destinationPlace)[0]} <abbr title="${airportMap.get(destinationPlace)[1]}">(${destinationPlace})</abbr></div>
-          </div>
-          <div class="content__response_flight_item_ticket--carrier">${carriersMap.get(carrierAirCompanyId)[0]}
-          </div>
-          <div class="content__response_flight_item_ticket--price"> <span>from</span><br> ${price} <span>uah</span></div>
-        </div>`);
-        optionWrapper.appendChild(optionTicket);
+      let optionTicket = document.createElement('div');
+      optionTicket.classList.add('content__response_flight_item_ticket')
+      optionTicket.insertAdjacentHTML('beforeend', 
+      `<div class="content__response_flight_item_ticket--wrapper">
+        <div class="content__response_flight_item_ticket--date">${getResponseFlightDate(originDate)}
+        </div>
+        <div class="content__response_flight_item_ticket--flight">
+          <div class="content__response_flight_item_ticket--flight-time">${getResponseFlightTime(originDate)}</div>
+          <div class="content__response_flight_item_ticket--flight-airport">${airportMap.get(originPlace)[0]} <abbr title="${airportMap.get(originPlace)[1]}">(${originPlace})</abbr> </div>
+        </div>
+        <div class="content__response_flight_item_ticket--flight content__response_flight_item_ticket--flight-1">
+          <div class="content__response_flight_item_ticket--flight-time">${getResponseFlightTime(destinationDate)}</div>
+          <div class="content__response_flight_item_ticket--flight-airport">${airportMap.get(destinationPlace)[0]} <abbr title="${airportMap.get(destinationPlace)[1]}">(${destinationPlace})</abbr></div>
+        </div>
+        <div class="content__response_flight_item_ticket--carrier">${carriersMap.get(carrierAirCompanyId)[0]}
+        </div>
+        <div class="content__response_flight_item_ticket--price"> <span>from</span><br> ${price} <span>uah</span></div>
+      </div>`);
+      optionWrapper.appendChild(optionTicket);
+
+      let oneStop = true;
+      if(obj.f[0].l.length>1) oneStop = false;
+      console.log(oneStop)
+      if(!oneStop) {
+        let stop = document.createElement('div') 
+        stop.style.marginTop = '5px'
+        stop.innerHTML = `${obj.f[0].l.length} transplants`
+        document.getElementsByClassName('content__response_flight_item_ticket--carrier')[i].appendChild(stop)
+      }
 
         /**<!--<div class="content__response_flight_item_ticket--carrier-plane">${carriersMap.get(carrierPlaneId)[0]}</div>
             <div class="content__response_flight_item_ticket--carrier-company">${carrierCompany}</div>--> */
 
-        let optionButtons = document.createElement('div');
-        optionButtons.classList.add('content__response_flight_item_buttons')
-        optionWrapper.appendChild(optionButtons);
+      let optionButtons = document.createElement('div');
+      optionButtons.classList.add('content__response_flight_item_buttons')
+      optionWrapper.appendChild(optionButtons);
 
-        let favoriteButton = document.createElement('a');
-        favoriteButton.classList.add('content__response_flight_item_button-fav')
-        favoriteButton.innerHTML = '♥';
-        favoriteButton.addEventListener('click', function () {
-          if(isAuth) addSidToFavorite(response.search_params.sid);
-     
-          else {
-            favoriteButton.innerHTML ='You need to log in'
-            favoriteButton.style.border = 'none'
-            favoriteButton.addEventListener('click', function () {
-              favoriteButton.href = '/auth/login-page'
-            })
-          }
-        })
-        
-        optionButtons.appendChild(favoriteButton);
+      let favoriteButton = document.createElement('a');
+      favoriteButton.classList.add('content__response_flight_item_button-fav')
+      favoriteButton.innerHTML = '♥';
+      favoriteButton.addEventListener('click', function () {
+        if(isAuth) addSidToFavorite(response.search_params.sid);
+    
+        else {
+          favoriteButton.innerHTML ='You need to log in'
+          favoriteButton.style.border = 'none'
+          favoriteButton.addEventListener('click', function () {
+            favoriteButton.href = '/auth/login-page'
+          })
+        }
+      })
+      
+      optionButtons.appendChild(favoriteButton);
 
-        let optionButton = document.createElement('div');
-        optionButton.classList.add('content__response_flight_item_button')
-        optionButton.addEventListener('click', function () {
-          getBookData(response, obj.l[0].id);
-        })
-        optionButton.insertAdjacentHTML('beforeend', `<button class="button">BUY</button>`);
-        optionButtons.appendChild(optionButton);
+      let optionButton = document.createElement('div');
+      optionButton.classList.add('content__response_flight_item_button')
+      optionButton.addEventListener('click', function () {
+        getBookData(response, obj.l[0].id);
+      })
+      optionButton.insertAdjacentHTML('beforeend', `<button class="button">BUY</button>`);
+      optionButtons.appendChild(optionButton);
      // }
     }
   }
@@ -284,7 +295,7 @@
 
       ).then((res) => {
         res.json().then((data) => showError(data.error))
-
+        //document.getElementsByClassName('content__response_flight_item_button-fav')[0].innerHTML = 'Added'
 
       }).catch(function () {
         console.log('Error occurred, please try again')

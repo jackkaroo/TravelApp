@@ -3,6 +3,7 @@ document.getElementsByClassName('header__nav-logout')[0].style.display = 'none'
 document.getElementsByClassName('header__nav-cab')[0].style.display = 'none'
 
 
+
 getFavoriteSid()
 
 function getFavoriteSid() {
@@ -26,35 +27,26 @@ function flightCreateSessionProfile(data) {
 
   for(let i=0;i<data.length;i++){
     let favItem = document.createElement('div');
-    flightPollProfile(data[i].sid)
-
-    // let favoriteButton = document.createElement('a');
-    // favoriteButton.classList.add('content__response_flight_item_button-delete')
-    // favoriteButton.innerHTML = 'delete';
-    // favoriteButton.addEventListener('click', function () {
-    //   deleteFavorite(data[i]._id);
-    // })
-    
-    // document.getElementsByClassName('profile__favorite')[0].appendChild(favoriteButton);
-
+    flightPollProfile(data[i])
     document.getElementsByClassName('profile__favorite')[0].appendChild(favItem)
   }
 }
 
 function flightPollProfile(response){
-  console.log(response)
+ 
 
   let xhr = new XMLHttpRequest();
   
   xhr.addEventListener("readystatechange", function () {
       if (this.readyState === this.DONE) {
         let responsePoll = JSON.parse(this.responseText);
-        console.log(responsePoll);
-        addFavoriteToDomProfile(responsePoll)
+     
+        
+        addFavoriteToDomProfile(responsePoll, response._id)
       }
   });
 
-  xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/poll?currency=UAH&n=15&ns=NON_STOP%252C%20ONE_STOP&so=PRICE&o=0&sid=${response}`);
+  xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/poll?currency=UAH&n=15&ns=NON_STOP%252C%20ONE_STOP&so=PRICE&o=0&sid=${response.sid}`);
 
   xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
   xhr.setRequestHeader("x-rapidapi-key", '5162173576msh4d8a143b4f1bd90p1eeeb1jsncfb9c791e740');
@@ -62,7 +54,7 @@ function flightPollProfile(response){
   xhr.send();
 }
 
-function addFavoriteToDomProfile(response) {
+function addFavoriteToDomProfile(response, bookId) {
 
   let airportMap = getResponseFlightAirportMap(response);
 
@@ -88,11 +80,20 @@ function addFavoriteToDomProfile(response) {
   </div>`);
   document.getElementsByClassName('profile__favorite')[0].appendChild(optionTicket);
 
+  let favoriteButton = document.createElement('a');
+  favoriteButton.classList.add('delete')
+  favoriteButton.classList.add('button')
+  favoriteButton.innerHTML = 'delete';
+  favoriteButton.addEventListener('click', function () {
+    deleteFavorite(bookId)
+  })
   
+  document.getElementsByClassName('profile__favorite')[0].appendChild(favoriteButton);
 }
 
 
 function deleteFavorite(bookId) {
+
 
   fetch(`/bookmark/${bookId}`,
       {
@@ -104,7 +105,13 @@ function deleteFavorite(bookId) {
 
     ).then((res) => {
       console.log('deleted')
+      updateDom()
+      
     }).catch(function () {
       console.log('Error occurred, please try again')
     })
+}
+
+function updateDom() {
+  document.location.reload(true);
 }
