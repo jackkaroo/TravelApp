@@ -1,8 +1,7 @@
+const apiKey = '45266a2716msh77748bd81cec01dp1d3795jsn903133b56017'
 console.log(isAuth)
 document.getElementsByClassName('header__nav-logout')[0].style.display = 'none'
 document.getElementsByClassName('header__nav-cab')[0].style.display = 'none'
-
-
 
 getFavoriteSid()
 
@@ -49,7 +48,7 @@ function flightPollProfile(response){
   xhr.open("GET", `https://tripadvisor1.p.rapidapi.com/flights/poll?currency=UAH&n=15&ns=NON_STOP%252C%20ONE_STOP&so=PRICE&o=0&sid=${response.sid}`);
 
   xhr.setRequestHeader("x-rapidapi-host", "tripadvisor1.p.rapidapi.com");
-  xhr.setRequestHeader("x-rapidapi-key", '824d22695cmshb4471de4c612457p122e52jsn3781e9030fbf');
+  xhr.setRequestHeader("x-rapidapi-key", apiKey);
   
   xhr.send();
 }
