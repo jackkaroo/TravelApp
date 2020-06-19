@@ -217,7 +217,9 @@
     const dayNames = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat",
     "Sun"];
 
+    console.log(baseDate)
     let date = new Date(baseDate)
+    console.log(date)
     let newDate = `${dayNames[date.getDay()]}, ${date.getDate()} ${monthNames[date.getMonth()]} ${date.getFullYear()}`
     
     return newDate;

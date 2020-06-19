@@ -1,5 +1,6 @@
 
-const apiKey = '5162173576msh4d8a143b4f1bd90p1eeeb1jsncfb9c791e740';
+//const apiKey = '5162173576msh4d8a143b4f1bd90p1eeeb1jsncfb9c791e740';
+const apiKey = '824d22695cmshb4471de4c612457p122e52jsn3781e9030fbf';
 
 const airportFromInput = document.getElementsByClassName('content__choose_plane_dest-from')[0];
 airportFromInput.addEventListener('keypress', function(){
@@ -108,7 +109,7 @@ function openFlightSearchWindow() {
     let date = tempDate.substring(0,2);
     let month = tempDate.substring(3,5);
     let year = tempDate.substring(6,10);
-    let newDate= `${year}-${month}-${date}`
+    let newDate= `${year}-${date}-${month}`
   
     return newDate;
   }
